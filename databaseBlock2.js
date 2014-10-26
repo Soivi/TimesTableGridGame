@@ -6,7 +6,7 @@
     }
 
  function exit() {
-	navigator.app.backHistory();
+	window.history.back();
     }
 
 function doNothing() {
@@ -23,37 +23,21 @@ function doNothing() {
     function querySuccess(tx, results) {
 	yourBestTime = results.rows.item(difficultyTable).data;
 	if(correctAnswers > yourBestTime) {
-					if(difficultyTable != 25){
-					if(correctAnswers >= unlockNextLevel && yourBestTime < unlockNextLevel) {
-		     			  navigator.notification.alert(
-			 		   'You opened a new level',  // message
-					    doNothing(),         // callback
-					    'NEW LEVEL',            // title
-					    'OK'                  // buttonName
-			);	
-			}}
-			  navigator.notification.alert(
-			    'You made a new record. You got ' + correctAnswers + ' correct',  // message
-			    db.transaction(populateDB, errorCB),         // callback
-			    'NEW RECORD',            // title
-			    'Done'                  // buttonName
-			);	
+			if(difficultyTable != 25){
+				if(correctAnswers >= unlockNextLevel && yourBestTime < unlockNextLevel) {
+		     			alert('You opened a new level');	
+					doNothing();
+				}}
+			alert('You made a new record. You got ' + correctAnswers + ' correct');
+			db.transaction(populateDB, errorCB)	
 		} 
 	else if (correctAnswers == 25 && yourBestTime == 25) {
-			  navigator.notification.alert(
-			    'Time to face harder levels?',  // message
-			    db.transaction(populateDB, errorCB),         // callback
-			    'TOO EASY?',            // title
-			    'Done'                  // buttonName
-			);	
+			alert('Time to face harder levels?');	
+			db.transaction(populateDB, errorCB);
 		}
 	else {
-		       navigator.notification.alert(
-			    'You only got ' + correctAnswers + ' correct',  // message
-			    exit(),         // callback
-			    'Game Over',            // title
-			    'OK'                  // buttonName
-			);	
+		       alert('You only got ' + correctAnswers + ' correct');	
+			exit();
 		}
     }
 
