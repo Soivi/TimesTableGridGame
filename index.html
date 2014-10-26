@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Times Table Grid Game</title>
+    
+        <meta charset="utf-8" />
+	<link href="styles/default.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body  style="background-image:url(background.png);">
+<img src="pictures/logo.png" alt="logo" height="27%" width="100%"> 
+<div class="indexButtons">
+	 <a href="play.html"><button type="button">Play</button></a>
+	 <a href="instructions.html"><button type="button">Instructions</button></a>
+	 <a href="highscores.html"><button type="button">High Scores</button></a>
+	 <a href="options.html"><button type="button">Options</button></a>
+</div>
+
+    <script type="text/javascript" charset="utf-8">
+
+	var allTimesBlock = 0;
+
+	document.addEventListener("backbutton", exit, false);
+	document.removeEventListener('backbutton',exit, false);
+        var db = window.openDatabase("Database", "1.0", "Cordova", 200000);
+        db.transaction(populateDB, errorCB, successCB);
+	db.transaction(queryDB, errorCB);
+	db.transaction(populateDBblocks, errorCB);
+
+    // Populate the database 
+    //
+    function populateDB(tx) {
+	tx.executeSql('DROP TABLE IF EXISTS HIGHSCORES');
+        tx.executeSql('CREATE TABLE IF NOT EXISTS HIGHSCORESTABLE (id unique, data)');
+	
+	for (var i = 0; i <= 25; i++) {
+         tx.executeSql('INSERT OR IGNORE INTO HIGHSCORESTABLE (id, data) VALUES ('+i+', 0)');
+	}
+    }
+
+    function queryDB(tx) {
+        tx.executeSql('SELECT * FROM HIGHSCORESTABLE', [], querySuccess, errorCB);
+    }
+
+ 	function querySuccess(tx, results) {
+				if(results.rows.item(15).data != 0){
+				for (var i = 6; i <= 15; i++) {
+		 			allTimesBlock = parseFloat(results.rows.item(i).data) + allTimesBlock;
+				}
+				}
+				
+	}
+
+    function populateDBblocks(tx) {
+	tx.executeSql('CREATE TABLE IF NOT EXISTS BLOCKS (id unique, data)');
+	if(allTimesBlock > 1000 || allTimesBlock == 0 ){
+	tx.executeSql('INSERT OR IGNORE INTO BLOCKS (id, data) VALUES (0, 0)');
+	} else {
+	tx.executeSql('INSERT OR IGNORE INTO BLOCKS (id, data) VALUES (0, 1)');
+	}
+    }
+
+    // Transaction error callback
+    //
+    function errorCB(err) {
+    }
+
+    // Transaction success callback
+    //
+    function successCB() {
+    }
+
+	function exit() {
+    }
+
+    </script>
+  </body>
+</html>

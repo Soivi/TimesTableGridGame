@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Times Table Grid Game</title>
+    
+        <meta charset="utf-8" />
+	<link href="styles/default.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body style="background-image:url(background2.png);">
+<div id="instuctions">
+  <img style="margin:0px auto;display:block" src="pictures/instructionslogo.png" alt="instructionslogo" height="15%" width="80%"> 
+<p style="text-align:justify; color:rgb(255,255,255);">Practice your multiplications! Above the grid you can see <b style="color:rgb(150,0,0);">PRODUCT</b>. Your task is to produce the correct calculation to match with the product and then place the product in the correct cell in the grid. For example, if the given <b style="color:rgb(150,0,0);">PRODUCT</b> is 8, you can place it in the convergence of cells 4 and 2, resulting then in the correct calculation. If you place the <b style="color:rgb(150,0,0);">PRODUCT</b> in the wrong cell, your phone will notify you by vibrating and you are given a time penalty. In the top right hand corner you can see your <b style="color:rgb(0,100,0);">CORRECT</b> answers and the sum of correct answers that you need to receive in order to pass the game. In the top left hand corner you can see your <b>TIME</b>. In the high scores section you can see your top time results.
+</p>
+</div>
+    <script type="text/javascript" charset="utf-8">
+
+ document.addEventListener("deviceready", onDeviceReady, false);
+
+ function onDeviceReady() {
+	document.addEventListener("backbutton", exit, false);
+    }
+
+	function exit() {
+		navigator.app.backHistory();
+	}
+
+ </script>
+  </body>
+</html>

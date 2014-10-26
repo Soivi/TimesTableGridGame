@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Times Table Grid Game</title>
+    
+        <meta charset="utf-8" />
+	<link href="styles/default.css" rel="stylesheet" type="text/css" />
+
+  </head>
+  <body>
+	<div id='infoCorrectAnswers'>&nbsp;</div><br /></p>
+  <div id='infoRandomNumber'>&nbsp;</div> 
+  
+  <table id="theTable"> </table>
+  
+    <script type="text/javascript" charset="utf-8" src="jquery-1.8.2.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="createTable.js"></script>
+    <script type="text/javascript" charset="utf-8" src="options.js"></script>
+    <script type="text/javascript" charset="utf-8">
+    document.addEventListener("deviceready", onDeviceReady, false);
+	var db = window.openDatabase("Database", "1.0", "Cordova", 200000);	
+    
+    function onDeviceReady() {
+	        db.transaction(queryDBVibrationOff, errorCBVibrationOff);
+	 document.addEventListener("backbutton", exit, false);
+    	makeTable();
+    	$('.guessbutton').mousedown(function(e) {
+		var num = $(this).attr('id');
+		if (num == wantedNumber) {
+			randomNumber();
+			$(this).attr('disabled', 'true');
+		} else {
+			wrongQuess();
+		}
+		});
+		randomNumber();
+     }
+
+
+	var wantedNumber;
+	var correctAnswers = -1;
+	var xMultiplication = 1;
+	var yMultiplication = 1;
+	var randomArrayNumbers = new Array();
+
+
+
+function randomNumber() {
+    correctAnswers++;
+    if(correctAnswers==25){
+    gameOver();
+    }
+    else{
+    var isFound = false;
+    	while(!isFound) {
+    		var randomNumber = Math.floor(Math.random()*25);
+    		wantedNumber = randomArrayNumbers[randomNumber];
+    		if(wantedNumber!=null){
+    			isFound=true;
+    			randomArrayNumbers[randomNumber] = null;
+    		}
+    }	
+	document.getElementById('infoRandomNumber').innerHTML = "PRODUCT: " + wantedNumber;
+	document.getElementById('infoCorrectAnswers').innerHTML = " CORRECT: " + correctAnswers + "/25";
+	}
+}
+	
+function wrongQuess() {
+	if(vibrationOff==0){
+	navigator.notification.vibrate(500);	// Vibrate for 0.5 seconds
+	}
+}
+
+	
+function gameOver(){
+			  navigator.notification.alert(
+			    'You have finished the game',  // message
+			    exit(),         // callback
+			    'Congratulations',            // title
+			    'Done'                  // buttonName
+			);	
+}
+
+function exit() {
+	navigator.app.backHistory();
+}
+
+
+    </script>
+  
+  </body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Play</title>
+
+        <meta charset="utf-8" />
+	<link href="styles/default.css" rel="stylesheet" type="text/css" />
+
+    <script type="text/javascript" charset="utf-8">
+
+
+    document.addEventListener("deviceready", onDeviceReady, false);
+
+    // Cordova is ready
+    //
+    function onDeviceReady() {
+	document.addEventListener("backbutton", exit, false);
+    }
+
+	function exit() {
+		navigator.app.backHistory();
+	}
+
+
+    </script>
+
+  </head>
+  <body style="background-image:url(background.png);">
+  <img style="margin:0px auto;display:block" src="pictures/highscoreslogo.png" alt="highscoreslogo" height="16%" width="100%"> 
+
+<div class="indexButtons">
+	 <a href="block0HighScores.html"><button id="block0Button">Block 0</button></a>
+	 <a href="block1HighScores.html"><button id="block1Button">Block 1</button></a>
+	 <a href="block2HighScores.html"><button id="block2Button">Block 2</button></a>
+</div>
+  </body>
+</html>
+
