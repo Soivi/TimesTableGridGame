@@ -1,5 +1,4 @@
 	db.transaction(queryDBVibrationOff, errorCBVibrationOff);
-	document.addEventListener("backbutton", exit, false);
     	makeTable();
     	$('.guessbutton').mousedown(function(e) {
 		var num = $(this).attr('id');
