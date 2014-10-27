@@ -92,7 +92,7 @@ function timeOver(){
 }
 
 	function exit() {
-		navigator.app.backHistory();
+		window.history.back();
 	}
 
  // Populate the database 
@@ -113,28 +113,16 @@ function timeOver(){
     function querySuccess(tx, results) {
 	yourBestTime = results.rows.item(difficultyTable).data;	
 	if(yourBestTime == 0) {
-			  navigator.notification.alert(
-			    'You made the impossible possible!!! Your time was ' + totalTime + ' sec. Have a cookie!',  // message
-			    db.transaction(populateDB, errorCB),         // callback
-			    'CONGRATULATIONS',            // title
-			    'Done'                  // buttonName
-			);	
+			alert('You made the impossible possible!!! Your time was ' + totalTime + ' sec. Have a cookie!');	
+			db.transaction(populateDB, errorCB),         // callback
 		}
 	else if (totalTime > yourBestTime) {
-			  navigator.notification.alert(
-			    'You made a new record. Your time was ' + totalTime + ' sec',  // message
-			    db.transaction(populateDB, errorCB),         // callback
-			    'NEW RECORD',            // title
-			    'Done'                  // buttonName
-			);	
+			  alert('You made a new record. Your time was ' + totalTime + ' sec');	
+			db.transaction(populateDB, errorCB);
 		}
 	else {
-		       navigator.notification.alert(
-			    'Your time was ' + totalTime + ' sec.',  // message
-			    exit(),         // callback
-			    'Game Over',            // title
-			    'OK'                  // buttonName
-			);	
+		       alert('Your time was ' + totalTime + ' sec.');	
+			exit();
 		}
     }
 

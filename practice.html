@@ -17,13 +17,18 @@
     <script type="text/javascript" charset="utf-8" src="createTable.js"></script>
     <script type="text/javascript" charset="utf-8" src="options.js"></script>
     <script type="text/javascript" charset="utf-8">
-    document.addEventListener("deviceready", onDeviceReady, false);
+
 	var db = window.openDatabase("Database", "1.0", "Cordova", 200000);	
-    
-    function onDeviceReady() {
-	        db.transaction(queryDBVibrationOff, errorCBVibrationOff);
-	 document.addEventListener("backbutton", exit, false);
+    	var wantedNumber;
+	var correctAnswers = -1;
+	var xMultiplication = 1;
+	var yMultiplication = 1;
+	var randomArrayNumbers = new Array();
+
+	db.transaction(queryDBVibrationOff, errorCBVibrationOff);
     	makeTable();
+	randomNumber();
+
     	$('.guessbutton').mousedown(function(e) {
 		var num = $(this).attr('id');
 		if (num == wantedNumber) {
@@ -32,17 +37,9 @@
 		} else {
 			wrongQuess();
 		}
-		});
-		randomNumber();
-     }
-
-
-	var wantedNumber;
-	var correctAnswers = -1;
-	var xMultiplication = 1;
-	var yMultiplication = 1;
-	var randomArrayNumbers = new Array();
-
+	});
+		
+	
 
 
 function randomNumber() {
@@ -67,22 +64,18 @@ function randomNumber() {
 	
 function wrongQuess() {
 	if(vibrationOff==0){
-	navigator.notification.vibrate(500);	// Vibrate for 0.5 seconds
+	navigator.vibrate(500);	// Vibrate for 0.5 seconds
 	}
 }
 
 	
 function gameOver(){
-			  navigator.notification.alert(
-			    'You have finished the game',  // message
-			    exit(),         // callback
-			    'Congratulations',            // title
-			    'Done'                  // buttonName
-			);	
+			  alert('You have finished the game');	
+			exit()
 }
 
 function exit() {
-	navigator.app.backHistory();
+	window.history.back();
 }
 
 
