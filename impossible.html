@@ -5,21 +5,7 @@
     
         <meta charset="utf-8" />
 	<link href="styles/default.css" rel="stylesheet" type="text/css" />
-
-  </head>
-  <body>
-  <p><div id="infoTime"></div>   <div id='infoCorrectAnswers'>&nbsp;</div><br /></p>
-  <div id='infoRandomNumber'>&nbsp;</div> 
-  
-  <table id="theTable"> </table>
-  
-    <script type="text/javascript" charset="utf-8" src="jquery-1.8.2.min.js"></script>
-    <script type="text/javascript" charset="utf-8" src="createTable.js"></script>
-    <script type="text/javascript" charset="utf-8" src="options.js"></script>
-    <script type="text/javascript" charset="utf-8" src="deviceReady.js"></script>
     <script type="text/javascript" charset="utf-8">
-
-
 	var wantedNumber;
 	var correctAnswers = 0;
 	var endingTime = new Date().getTime() + 40000;
@@ -30,8 +16,17 @@
 	var difficultyTable = 5;
 	var randomArrayNumbers = new Array();
 	var db = window.openDatabase("Database", "1.0", "Cordova", 200000);
+    </script>
+  </head>
+  <body>
+  <p><div id="infoTime"></div>   <div id='infoCorrectAnswers'>&nbsp;</div><br /></p>
+  <div id='infoRandomNumber'>&nbsp;</div> 
+  
+  <table id="theTable"> </table>
+  
+      <script type="text/javascript" charset="utf-8" src="jquery-1.8.2.min.js"></script>
 
-
+    <script type="text/javascript" charset="utf-8">
 	function startTime(){
 	document.getElementById('infoTime').innerHTML= "Time: " + Math.round((endingTime - new Date().getTime())/1000);
 	if((endingTime - new Date().getTime())<0){
@@ -83,12 +78,7 @@ function gameOver(){
 }
 
 function timeOver(){
-			  navigator.notification.alert(
-			    'Your time has run out!!!',  // message
-			    exit(),         // callback
-			    'GAME OVER',            // title
-			    'Done'                  // buttonName
-			);
+			  alert('Your time has run out!!!');
 }
 
 	function exit() {
@@ -114,7 +104,7 @@ function timeOver(){
 	yourBestTime = results.rows.item(difficultyTable).data;	
 	if(yourBestTime == 0) {
 			alert('You made the impossible possible!!! Your time was ' + totalTime + ' sec. Have a cookie!');	
-			db.transaction(populateDB, errorCB),         // callback
+			db.transaction(populateDB, errorCB);         // callback
 		}
 	else if (totalTime > yourBestTime) {
 			  alert('You made a new record. Your time was ' + totalTime + ' sec');	
@@ -128,11 +118,14 @@ function timeOver(){
 
     // Transaction error callback
     //
-    function errorCB(err) {
+    function errorCB(err) {q
         console.log("Error processing SQL: "+err.code);
     }
 
     </script>
-  
+
+    <script type="text/javascript" charset="utf-8" src="createTable.js"></script>
+    <script type="text/javascript" charset="utf-8" src="options.js"></script>
+    <script type="text/javascript" charset="utf-8" src="deviceReady.js"></script>
   </body>
 </html>
