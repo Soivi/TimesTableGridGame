@@ -12,11 +12,11 @@
 	 <a href="play.html"><button type="button">Play</button></a>
 	 <a href="instructions.html"><button type="button">Instructions</button></a>
 	 <a href="highscores.html"><button type="button">High Scores</button></a>
-	 <a href="options.html"><button type="button">Options</button></a>
+	 <!--Vibration off because it's not supported-->
+	 <!--<a href="options.html"><button type="button">Options</button></a>-->
 </div>
 
     <script type="text/javascript" charset="utf-8">
-
 	var allTimesBlock = 0;
 
 	document.addEventListener("backbutton", exit, false);
@@ -31,10 +31,11 @@
     function populateDB(tx) {
 	tx.executeSql('DROP TABLE IF EXISTS HIGHSCORES');
         tx.executeSql('CREATE TABLE IF NOT EXISTS HIGHSCORESTABLE (id unique, data)');
-	
 	for (var i = 0; i <= 25; i++) {
          tx.executeSql('INSERT OR IGNORE INTO HIGHSCORESTABLE (id, data) VALUES ('+i+', 0)');
 	}
+	//Vibration off because it's not supported
+        tx.executeSql('UPDATE HIGHSCORESTABLE SET data=1 WHERE id=0');
     }
 
     function queryDB(tx) {

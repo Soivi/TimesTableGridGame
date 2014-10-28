@@ -8,17 +8,7 @@
 
     <script type="text/javascript" charset="utf-8">
         var db = window.openDatabase("Database", "1.0", "Cordova", 200000);
-
-    // Wait for Cordova to load
-    //
-    document.addEventListener("deviceready", onDeviceReady, false);
-
-    // Cordova is ready
-    //
-    function onDeviceReady() {
-	document.addEventListener("backbutton", exit, false);
         db.transaction(queryDB, errorCB);
-    }
 
     // Query the database
     //

@@ -6,7 +6,7 @@
 		
 	function wrongQuess() {
 	if(vibrationOff==0){
-		navigator.notification.vibrate(500);	// Vibrate for 0.5 seconds
+		navigator.vibrate(500);	// Vibrate for 0.5 seconds
 	}
 	startingTime= startingTime-5000;
 	}
