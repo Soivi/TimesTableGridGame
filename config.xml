@@ -10,7 +10,7 @@
     <name>Times Table Grid Game</name>
 
     <description>
-        Hello World sample application that responds to the deviceready event.
+        This isn't an ordinary times table game, this is something new! In this game you are asked to place the product of a multiplication in the correct cell in the grid.
     </description>
 
     <author href="http://soivi.net" email="soivi.lauri@gmail.com">
@@ -22,7 +22,7 @@
         following tag to your config.xml; you will still have the INTERNET
         permission on your app, which PhoneGap requires.
     -->
-    <!--<preference name="permissions"                value="none"/> -->
+    <preference name="permissions"                value="none"/>
 
     <!-- Customize your app and platform with the preference element. -->
     <preference name="phonegap-version"           value="3.6.3" />          <!-- all: current version of PhoneGap -->
@@ -43,7 +43,7 @@
 
     <!-- Plugins -->
 
-    <!-- Core plugins -->
+    <!-- Core plugins 
 	<gap:plugin name="org.apache.cordova.battery-status" version="0.2.11" />
 	<gap:plugin name="org.apache.cordova.camera" version="0.3.2" />
 	<gap:plugin name="org.apache.cordova.console" version="0.2.11" />
@@ -62,7 +62,7 @@
 	<gap:plugin name="org.apache.cordova.network-information" version="0.2.12" />
 	<gap:plugin name="org.apache.cordova.splashscreen" version="0.3.3" />
 	<gap:plugin name="org.apache.cordova.vibration" version="0.3.11" />
-
+-->
 
     <!-- Third party plugins -->
     <!-- A list of available plugins are available at https://build.phonegap.com/plugins -->
