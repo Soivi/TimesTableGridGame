@@ -10,7 +10,6 @@
 
         var db = window.openDatabase("Database", "1.0", "Cordova", 200000);
 	var unlockSeconds = 15;
-	document.addEventListener("backbutton", exit, false);
         db.transaction(queryDB, errorCB);
 
     // Query the database

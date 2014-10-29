@@ -5,14 +5,21 @@
     
         <meta charset="utf-8" />
 	<link href="styles/default.css" rel="stylesheet" type="text/css" />
-
+    <script type="text/javascript" charset="utf-8">
+	var unlockNextLevel = 15;
+	var answersToWin = 25;
+	var timeToPassLvl = 80000;
+	var endingTime = new Date().getTime() + timeToPassLvl;
+	var xMultiplication = 13;
+	var yMultiplication = 14;
+	var difficultyTable = 24;
+    </script>
   </head>
   <body>
   <p><div id="infoTime"></div>   <div id='infoCorrectAnswers'>&nbsp;</div><br /></p>
   <div id='infoRandomNumber'>&nbsp;</div> 
   
   <table id="theTable"> </table>
-  
     <script type="text/javascript" charset="utf-8" src="jquery-1.8.2.min.js"></script>
     <script type="text/javascript" charset="utf-8" src="createTable.js"></script>
     <script type="text/javascript" charset="utf-8" src="quessAndRandomNumber.js"></script>
@@ -20,24 +27,5 @@
     <script type="text/javascript" charset="utf-8" src="databaseBlock2.js"></script>
     <script type="text/javascript" charset="utf-8" src="options.js"></script>
     <script type="text/javascript" charset="utf-8" src="deviceReady.js"></script>
-    <script type="text/javascript" charset="utf-8">
-
-	var unlockNextLevel = 15;
-	var answersToWin = 25;
-	var wantedNumber;
-	var correctAnswers = -1;
-	var timeToPassLvl = 80000;
-	var endingTime = new Date().getTime() + timeToPassLvl;
-	var totalTime = 0;
-	var xMultiplication = 13;
-	var yMultiplication = 14;
-	var yourBestTime = 0;
-	var difficultyTable = 24;
-	var randomArrayNumbers = new Array();
-	var db = window.openDatabase("Database", "1.0", "Cordova", 200000);
-
-
-    </script>
-  
   </body>
 </html>
