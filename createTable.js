@@ -34,17 +34,17 @@
 						var newTd = document.createElement('td');
 						var button = document.createElement('button');
 						//For debugging. Give answers to buttons
-						button.setAttribute('onclick', 'quessNumber('+((i+yMultiplication)*(k+xMultiplication))+');');
+						//button.setAttribute('onclick', 'quessNumber('+((i+yMultiplication)*(k+xMultiplication))+');');
 						
 						button.setAttribute('class', 'guessbutton');
 						button.setAttribute('id', ((i+yMultiplication)*(k+xMultiplication)));
 						//For debugging. Give answers to buttons
-						var teksti = document.createTextNode((i+yMultiplication)*(k+xMultiplication));
+						//var teksti = document.createTextNode((i+yMultiplication)*(k+xMultiplication));
 						
 						randomArrayNumbers[t] = (i+yMultiplication)*(k+xMultiplication);
 						t++;
 						//For debugging. Give answers to buttons
-						button.appendChild(teksti);
+						//button.appendChild(teksti);
 						
 						newTd.appendChild(button);
 						newTr.appendChild(newTd);
