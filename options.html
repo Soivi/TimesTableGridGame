@@ -9,56 +9,48 @@
     <script type="text/javascript" charset="utf-8">
 
         var db = window.openDatabase("Database", "1.0", "Cordova", 200000);	
-	var vibartionOff = 0;
+		var vibrationVar = 0;
 
-	document.addEventListener("backbutton", exit, false);
-	db.transaction(queryDB, errorCB);
+		document.addEventListener("backbutton", exit, false);
+		db.transaction(queryDB, errorCB);
 
-    // Query the database
-    //
-    function queryDB(tx) {
-        tx.executeSql('SELECT * FROM HIGHSCORESTABLE', [], querySuccess, errorCB);
-    }
+		// Query the database
+		function queryDB(tx) {
+			tx.executeSql('SELECT * FROM HIGHSCORESTABLE', [], querySuccess, errorCB);
+		}
 
-    // Query the success callback
-    //
-    function querySuccess(tx, results) {
-		if(results.rows.item(0).data==0) {
-			document.getElementById("vibrationOn").disabled=true;
-			document.getElementById("vibrationOff").disabled=false;
-		} else {
- 			document.getElementById("vibrationOff").disabled=true;
-			document.getElementById("vibrationOn").disabled=false;
-   		 }
-	}
+		// Query the success callback
+		function querySuccess(tx, results) {
+			if(results.rows.item(0).data==0) {
+				document.getElementById("vibrationOn").disabled=true;
+				document.getElementById("vibrationOff").disabled=false;
+			} else {
+				document.getElementById("vibrationOff").disabled=true;
+				document.getElementById("vibrationOn").disabled=false;
+			}
+		}
 
-	function vibrationOff(number) {
-	vibartionOff = number;
-	db.transaction(populateDB, errorCB, successCB);
+		function vibrationOff(number) {
+			vibrationVar = number;
+			db.transaction(populateDB, errorCB, successCB);
+		} 
 
-	} 
+		// Transaction error callback
+		function errorCB(err) {}
 
-	// Transaction error callback
-	//
-	function errorCB(err) {
-	}
+		// Transaction success callback
+		function successCB() {
+			db.transaction(queryDB, errorCB);
+		}
 
-	// Transaction success callback
-	//
-	function successCB() {
-	db.transaction(queryDB, errorCB);
-	}
+		function exit() {
+			navigator.app.backHistory();
+		}
 
-	function exit() {
-		navigator.app.backHistory();
-	}
-
-
-    // Populate the database 
-    //
-    function populateDB(tx) {
-         	tx.executeSql('UPDATE HIGHSCORESTABLE SET data='+vibartionOff+' WHERE id=0');
-    }
+		// Populate the database
+		function populateDB(tx) {
+			tx.executeSql('UPDATE HIGHSCORESTABLE SET data='+vibrationVar+' WHERE id=0');
+		}
 
 //	function facebook() {
 //	document.addEventListener("backbutton", exit, false);
@@ -88,7 +80,7 @@
 
 
 <div class="indexButtons">
-	 <a onClick="vibrationOff(0)"><button id="vibrationOn">Vibration ON</button></a>
+	<a onClick="vibrationOff(0)"><button id="vibrationOn">Vibration ON</button></a>
 	<a onClick="vibrationOff(1)"><button id="vibrationOff">Vibration OFF</button></a>
 <!--	
 		<a onClick="facebook()">
