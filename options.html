@@ -33,6 +33,9 @@
 		function vibrationOff(number) {
 			vibrationVar = number;
 			db.transaction(populateDB, errorCB, successCB);
+			if(number==0) {
+				navigator.vibrate(1000);
+			}
 		} 
 
 		// Transaction error callback
