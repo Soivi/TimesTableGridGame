@@ -46,13 +46,10 @@
 			tx.executeSql('DROP TABLE IF EXISTS HIGHSCORES');
 			tx.executeSql('CREATE TABLE IF NOT EXISTS HIGHSCORESTABLE (id unique, data)');
 			
-			tx.executeSql('INSERT OR IGNORE INTO HIGHSCORESTABLE (id, data) VALUES (0, 1)');
+			tx.executeSql('INSERT OR IGNORE INTO HIGHSCORESTABLE (id, data) VALUES (0, 0)');
 			for (var i = 1; i <= 25; i++) {
 				tx.executeSql('INSERT OR IGNORE INTO HIGHSCORESTABLE (id, data) VALUES ('+i+', 0)');
 			}
-			
-			//Vibration off because it's not supported
-			//tx.executeSql('UPDATE HIGHSCORESTABLE SET data=1 WHERE id=0');
 		}
 
 		function queryDB(tx) {
