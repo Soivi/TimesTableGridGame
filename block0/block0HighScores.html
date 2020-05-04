@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>High Scores</title>
+
+        <meta charset="utf-8" />
+	<link href="../styles/default.css" rel="stylesheet" type="text/css" />
+
+    <script type="text/javascript" charset="utf-8">
+
+        var db = window.openDatabase("Database", "1.0", "Cordova", 200000);	
+        db.transaction(queryDB, errorCB);
+
+    // Query the database
+    //
+    function queryDB(tx) {
+        tx.executeSql('SELECT * FROM HIGHSCORESTABLE', [], querySuccess, errorCB);
+    }
+
+    // Query the success callback
+    //
+    function querySuccess(tx, results) {
+ 		easyText.innerHTML= 'Easy:';
+		mediumText.innerHTML= 'Medium:';
+		hardText.innerHTML= 'Hard:';
+		veryHardText.innerHTML= 'Very Hard:';
+		impossibleText.innerHTML= 'Impossible:';
+
+		if(results.rows.item(1).data==0) {
+			easyTime.innerHTML= 'No record'
+		} else {
+ 			easyTime.innerHTML= results.rows.item(1).data + ' sec';
+		}
+		if(results.rows.item(2).data==0){
+			mediumTime.innerHTML= 'No record'
+		} else {
+			mediumTime.innerHTML= results.rows.item(2).data + ' sec';
+		}
+		if(results.rows.item(3).data==0) {
+			hardTime.innerHTML= 'No record'
+		} else {
+			hardTime.innerHTML= results.rows.item(3).data + ' sec';
+		} if (results.rows.item(4).data==0) {
+			veryHardTime.innerHTML= 'No record'
+		} else {
+			veryHardTime.innerHTML= results.rows.item(4).data + ' sec';
+		}
+		if (results.rows.item(5).data==0) {
+			impossibleTime.innerHTML= 'No record'
+		} else {
+			impossibleTime.innerHTML= results.rows.item(5).data + ' sec';
+		}
+
+    }
+
+    // Transaction error callback
+    //
+    function errorCB(err) {
+        console.log("Error processing SQL: "+err.code);
+    }
+    </script>
+  </head>
+<body style="background-image:url(../pictures/background2.png); color:rgb(255,255,255);">
+ 	  	 <p><div id="easyText" class="highscoresText"/></div><div id="easyTime" class="highscores"></div></p>
+		<p><div id="mediumText" class="highscoresText"/></div><div id="mediumTime" class="highscores"></div></p>
+		<p><div id="hardText" class="highscoresText"/></div><div id="hardTime" class="highscores"></div></p>
+		<p><div id="veryHardText" class="highscoresText"/></div><div id="veryHardTime" class="highscores"></div></p>
+		<p><div id="impossibleText" class="highscoresText"/></div><div id="impossibleTime" class="highscores"></div></p>
+  </body>
+</html>
+

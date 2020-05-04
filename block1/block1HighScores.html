@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>High Scores</title>
+
+        <meta charset="utf-8" />
+	<link href="../styles/default.css" rel="stylesheet" type="text/css" />
+
+    <script type="text/javascript" charset="utf-8">
+
+        var db = window.openDatabase("Database", "1.0", "Cordova", 200000);	
+	var allTimes = 0;
+
+        db.transaction(queryDB, errorCB);
+
+    // Query the database
+    //
+    function queryDB(tx) {
+        tx.executeSql('SELECT * FROM HIGHSCORESTABLE', [], querySuccess, errorCB);
+    }
+
+    // Query the success callback
+    //
+    function querySuccess(tx, results) {
+		totalText.innerHTML= 'Total time:';
+ 		level1Text.innerHTML= 'Level 1:';
+		level2Text.innerHTML= 'Level 2:';
+		level3Text.innerHTML= 'Level 3:';
+		level4Text.innerHTML= 'Level 4:';
+		level5Text.innerHTML= 'Level 5:';
+ 		level6Text.innerHTML= 'Level 6:';
+		level7Text.innerHTML= 'Level 7:';
+		level8Text.innerHTML= 'Level 8:';
+		level9Text.innerHTML= 'Level 9:';
+		level10Text.innerHTML= 'Level 10:';
+
+		if(results.rows.item(6).data==0) {
+			level1Time.innerHTML= 'No record'
+		} else {
+ 			level1Time.innerHTML= results.rows.item(6).data + ' sec';
+		}
+		if(results.rows.item(7).data==0){
+			level2Time.innerHTML= 'No record'
+		} else {
+			level2Time.innerHTML= results.rows.item(7).data + ' sec';
+		}
+		if(results.rows.item(8).data==0) {
+			level3Time.innerHTML= 'No record'
+		} else {
+			level3Time.innerHTML= results.rows.item(8).data + ' sec';
+		} if (results.rows.item(9).data==0) {
+			level4Time.innerHTML= 'No record'
+		} else {
+			level4Time.innerHTML= results.rows.item(9).data + ' sec';
+		}
+		if (results.rows.item(10).data==0) {
+			level5Time.innerHTML= 'No record'
+		} else {
+			level5Time.innerHTML= results.rows.item(10).data + ' sec';
+		}
+		if(results.rows.item(11).data==0) {
+			level6Time.innerHTML= 'No record'
+		} else {
+ 			level6Time.innerHTML= results.rows.item(11).data + ' sec';
+		}
+		if(results.rows.item(12).data==0){
+			level7Time.innerHTML= 'No record'
+		} else {
+			level7Time.innerHTML= results.rows.item(12).data + ' sec';
+		}
+		if(results.rows.item(13).data==0) {
+			level8Time.innerHTML= 'No record'
+		} else {
+			level8Time.innerHTML= results.rows.item(13).data + ' sec'; } 
+		if (results.rows.item(14).data==0) {
+			level9Time.innerHTML= 'No record'
+		} else {
+			level9Time.innerHTML= results.rows.item(14).data + ' sec';
+		}
+		if (results.rows.item(15).data==0) {
+			level10Time.innerHTML= 'No record'
+		} else {
+			level10Time.innerHTML= results.rows.item(15).data + ' sec';
+		}
+		if (results.rows.item(15).data==0) {
+			totalTime.innerHTML= 'No record'
+		} else {
+			for (var i = 6; i <= 15; i++) {
+         			allTimes = parseFloat(results.rows.item(i).data) + allTimes;
+			}
+			totalTime.innerHTML = Math.round((allTimes*100))/100 + ' sec';
+		}
+
+
+    }
+
+    // Transaction error callback
+    //
+    function errorCB(err) {
+        console.log("Error processing SQL: "+err.code);
+    }
+    </script>
+  </head>
+<body style="background-image:url(../pictures/background2.png); color:rgb(255,255,255);">
+		<p><div id="totalText" class="highscoresText"/></div><div id="totalTime" class="highscores"></div></p>
+ 	  	<p><div id="level1Text" class="highscoresText"/></div><div id="level1Time" class="highscores"></div></p>
+		<p><div id="level2Text" class="highscoresText"/></div><div id="level2Time" class="highscores"></div></p>
+		<p><div id="level3Text" class="highscoresText"/></div><div id="level3Time" class="highscores"></div></p>
+		<p><div id="level4Text" class="highscoresText"/></div><div id="level4Time" class="highscores"></div></p>
+		<p><div id="level5Text" class="highscoresText"/></div><div id="level5Time" class="highscores"></div></p>
+ 	  	<p><div id="level6Text" class="highscoresText"/></div><div id="level6Time" class="highscores"></div></p>
+		<p><div id="level7Text" class="highscoresText"/></div><div id="level7Time" class="highscores"></div></p>
+		<p><div id="level8Text" class="highscoresText"/></div><div id="level8Time" class="highscores"></div></p>
+		<p><div id="level9Text" class="highscoresText"/></div><div id="level9Time" class="highscores"></div></p>
+		<p><div id="level10Text" class="highscoresText"/></div><div id="level10Time" class="highscores"></div></p>
+	
+  </body>
+</html>
+
