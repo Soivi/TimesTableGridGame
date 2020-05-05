@@ -7,15 +7,17 @@
 
 db.transaction(queryDBVibrationOff, errorCBVibrationOff);
 makeTable();
-$('.guessbutton').mousedown(function(e) {
-	var num = $(this).attr('id');
+
+function quessClick(num, id){
 	if (num == wantedNumber) {
 		randomNumber();
-		$(this).attr('disabled', 'true');
+		document.getElementById(id).removeAttribute("onmousedown");
+		document.getElementById(id).classList.add("guessbuttondisabled");
+		document.getElementById(id).classList.remove("guessbutton");
 	} else {
 		wrongQuess();
 	}
-});
+}
 
 randomNumber();
 startTime();

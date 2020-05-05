@@ -29,18 +29,17 @@
     	makeTable();
 	randomNumber();
 
-    	$('.guessbutton').mousedown(function(e) {
-		var num = $(this).attr('id');
-		if (num == wantedNumber) {
-			randomNumber();
-			$(this).attr('disabled', 'true');
-		} else {
-			wrongQuess();
-		}
-	});
-		
-	
 
+function quessClick(num, id){
+	if (num == wantedNumber) {
+		randomNumber();
+		document.getElementById(id).removeAttribute("onmousedown");
+		document.getElementById(id).classList.add("guessbuttondisabled");
+		document.getElementById(id).classList.remove("guessbutton");
+	} else {
+		wrongQuess();
+	}
+}
 
 function randomNumber() {
     correctAnswers++;
@@ -77,8 +76,6 @@ function gameOver(){
 function exit() {
 	window.history.back();
 }
-
-
     </script>
   
   </body>

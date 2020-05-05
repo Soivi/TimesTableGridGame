@@ -155,10 +155,10 @@ button {
 
 .guessbutton {
 	background: #343a40;
-	padding: 10%;
-	border: none;
+	/* this is for debugging theTable td color have to take off*/
+	/*color: white !important; */
 }
 
-.guessbutton:disabled {
+.guessbuttondisabled {
 	background: rgb(185,255,128);
 }
