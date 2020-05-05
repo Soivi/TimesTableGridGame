@@ -4,8 +4,8 @@
 <widget xmlns     = "http://www.w3.org/ns/widgets"
         xmlns:gap = "http://phonegap.com/ns/1.0"
         id        = "com.soivi.timestablegridgame"
-	versionCode = "12" 
-        version   = "1.22">
+	versionCode = "13" 
+        version   = "1.23">
 
     <name>Times Table Grid Game</name>
 
