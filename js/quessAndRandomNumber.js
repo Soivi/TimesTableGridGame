@@ -17,14 +17,3 @@ function randomNumber() {
 	document.getElementById('infoCorrectAnswers').innerHTML = " CORRECT: " + correctAnswers + "/" + answersToWin;
 	}
 }
-
-	
-	
-function quessNumber(quessedNumber) {
-	if(quessedNumber==wantedNumber) {
-	randomNumber();
-	}else{
-	wrongQuess();
-	}
-}
-

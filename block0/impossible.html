@@ -58,15 +58,6 @@ function wrongQuess() {
 	endingTime= endingTime-5000;
 }
 	
-	
-function quessNumber(quessedNumber) {
-	if(quessedNumber==wantedNumber) {
-	randomNumber();
-	}else{
-	wrongQuess();
-	}
-}
-	
 function gameOver(){
 	totalTime = (endingTime - new Date().getTime())/1000;
         db.transaction(queryDB, errorCB);
