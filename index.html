@@ -30,12 +30,11 @@
 		function options() {
 			// enable vibration support
 			navigator.vibrate = navigator.vibrate || navigator.webkitVibrate || navigator.mozVibrate || navigator.msVibrate;
-
 			if (navigator.vibrate) {
 				// vibration API supported
-				$('#optionId').show();
+				document.getElementById("optionId").style = "display: block"
 			} else {
-				$('#optionId').hide();
+				document.getElementById("optionId").style = "display: none"
 			}
 		}
 		
