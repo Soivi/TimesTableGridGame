@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Options</title>
 
-        <meta charset="utf-8" />
+<head>
+	<title>Options</title>
+
+	<meta charset="utf-8" />
 	<link href="styles/default.css" rel="stylesheet" type="text/css" />
 
-    <script type="text/javascript" charset="utf-8">
+	<script type="text/javascript" charset="utf-8">
 
-        var db = window.openDatabase("Database", "1.0", "Cordova", 200000);	
+		var db = window.openDatabase("Database", "1.0", "Cordova", 200000);
 		var vibrationVar = 0;
 
 		//document.addEventListener("backbutton", exit, false);
@@ -21,25 +22,25 @@
 
 		// Query the success callback
 		function querySuccess(tx, results) {
-			if(results.rows.item(0).data==0) {
-				document.getElementById("vibrationOn").disabled=true;
-				document.getElementById("vibrationOff").disabled=false;
+			if (results.rows.item(0).data == 0) {
+				document.getElementById("vibrationOn").disabled = true;
+				document.getElementById("vibrationOff").disabled = false;
 			} else {
-				document.getElementById("vibrationOff").disabled=true;
-				document.getElementById("vibrationOn").disabled=false;
+				document.getElementById("vibrationOff").disabled = true;
+				document.getElementById("vibrationOn").disabled = false;
 			}
 		}
 
 		function vibrationOff(number) {
 			vibrationVar = number;
 			db.transaction(populateDB, errorCB, successCB);
-			if(number==0) {
+			if (number == 0) {
 				navigator.vibrate(1000);
 			}
-		} 
+		}
 
 		// Transaction error callback
-		function errorCB(err) {}
+		function errorCB(err) { }
 
 		// Transaction success callback
 		function successCB() {
@@ -52,44 +53,18 @@
 
 		// Populate the database
 		function populateDB(tx) {
-			tx.executeSql('UPDATE HIGHSCORESTABLE SET data='+vibrationVar+' WHERE id=0');
+			tx.executeSql('UPDATE HIGHSCORESTABLE SET data=' + vibrationVar + ' WHERE id=0');
 		}
+	</script>
+</head>
 
-//	function facebook() {
-//	document.addEventListener("backbutton", exit, false);
-//	document.removeEventListener('backbutton',exit, false);
-//	window.location="http://m.facebook.com/sharer.php?u=https://play.google.com/store/apps/details?id=com.soivi.timestablegridgame";
-//}
+<body style="background-image:url(pictures/background.png);">
+	<img style="margin:0px auto;display:block" src="pictures/optionslogo.png" alt="optionslogo" height="16%"
+		width="70%">
+	<div class="indexButtons">
+		<a onClick="vibrationOff(0)"><button id="vibrationOn">Vibration ON</button></a>
+		<a onClick="vibrationOff(1)"><button id="vibrationOff">Vibration OFF</button></a>
+	</div>
+</body>
 
-
-    </script>
-  </head>
-  <body style="background-image:url(pictures/background.png);">
-    <img style="margin:0px auto;display:block" src="pictures/optionslogo.png" alt="optionslogo" height="16%" width="70%"> 
-<!-- Home 
-                <label for="toggleswitch1">
-                    Vibrationd
-                </label>
-                <select name="toggleswitch1" id="toggleswitch1" data-theme="a" data-role="slider">
-                    <option value="off">
-                        Off
-                    </option>
-                    <option value="on">
-                        On
-                    </option>
-                </select>
-
--->
-
-
-<div class="indexButtons">
-	<a onClick="vibrationOff(0)"><button id="vibrationOn">Vibration ON</button></a>
-	<a onClick="vibrationOff(1)"><button id="vibrationOff">Vibration OFF</button></a>
-<!--	
-		<a onClick="facebook()">
-		<button style="background-color:rgb(0,0,190); border:3px solid rgb(0,0,190);" type="button">Share on Facebook</button></a> 
- -->
-</div>
-  </body>
 </html>
-

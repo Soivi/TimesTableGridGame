@@ -1,38 +1,29 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Play</title>
 
-        <meta charset="utf-8" />
-	<link href="styles/default.css" rel="stylesheet" type="text/css" />
+<head>
+  <title>Play</title>
 
-    <script type="text/javascript" charset="utf-8">
+  <meta charset="utf-8" />
+  <link href="styles/default.css" rel="stylesheet" type="text/css" />
 
+  <script type="text/javascript" charset="utf-8">
+    function exit() {
+      navigator.app.backHistory();
+    }
+  </script>
 
-//    document.addEventListener("deviceready", onDeviceReady, false);
+</head>
 
-    // Cordova is ready
-    //
-//    function onDeviceReady() {
-//	document.addEventListener("backbutton", exit, false);
-//    }
+<body style="background-image:url(pictures/background.png);">
+  <img style="margin:0px auto;display:block" src="pictures/highscoreslogo.png" alt="highscoreslogo" height="16%"
+    width="100%">
 
-	function exit() {
-		navigator.app.backHistory();
-	}
+  <div class="indexButtons">
+    <a href="block0/block0HighScores.html"><button id="block0Button">Block 0</button></a>
+    <a href="block1/block1HighScores.html"><button id="block1Button">Block 1</button></a>
+    <a href="block2/block2HighScores.html"><button id="block2Button">Block 2</button></a>
+  </div>
+</body>
 
-
-    </script>
-
-  </head>
-  <body style="background-image:url(pictures/background.png);">
-  <img style="margin:0px auto;display:block" src="pictures/highscoreslogo.png" alt="highscoreslogo" height="16%" width="100%"> 
-
-<div class="indexButtons">
-	 <a href="block0/block0HighScores.html"><button id="block0Button">Block 0</button></a>
-	 <a href="block1/block1HighScores.html"><button id="block1Button">Block 1</button></a>
-	 <a href="block2/block2HighScores.html"><button id="block2Button">Block 2</button></a>
-</div>
-  </body>
 </html>
-
