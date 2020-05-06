@@ -1,81 +1,84 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Times Table Grid Game</title>
-    
-        <meta charset="utf-8" />
+
+<head>
+	<title>Times Table Grid Game</title>
+
+	<meta charset="utf-8" />
 	<link href="../styles/default.css" rel="stylesheet" type="text/css" />
 
-  </head>
-  <body>
+</head>
+
+<body>
 	<div id='infoCorrectAnswers'>&nbsp;</div><br /></p>
-  <div id='infoRandomNumber'>&nbsp;</div> 
-  
-  <table id="theTable"> </table>
-  
-    <script type="text/javascript" charset="utf-8" src="../js/createTable.js"></script>
-    <script type="text/javascript" charset="utf-8" src="../js/options.js"></script>
-    <script type="text/javascript" charset="utf-8">
+	<div id='infoRandomNumber'>&nbsp;</div>
 
-	var db = window.openDatabase("Database", "1.0", "Cordova", 200000);	
-    	var wantedNumber;
-	var correctAnswers = -1;
-	var xMultiplication = 1;
-	var yMultiplication = 1;
-	var randomArrayNumbers = new Array();
+	<table id="theTable"> </table>
 
-	db.transaction(queryDBVibrationOff, errorCBVibrationOff);
-    	makeTable();
-	randomNumber();
+	<script type="text/javascript" charset="utf-8" src="../js/createTable.js"></script>
+	<script type="text/javascript" charset="utf-8" src="../js/options.js"></script>
+	<script type="text/javascript" charset="utf-8">
 
+		var db = window.openDatabase("Database", "1.0", "Cordova", 200000);
+		var wantedNumber;
+		var correctAnswers = -1;
+		var xMultiplication = 1;
+		var yMultiplication = 1;
+		var randomArrayNumbers = new Array();
 
-function quessClick(num, id){
-	if (num == wantedNumber) {
+		db.transaction(queryDBVibrationOff, errorCBVibrationOff);
+		makeTable();
 		randomNumber();
-		document.getElementById(id).removeAttribute("onmousedown");
-		document.getElementById(id).classList.add("guessbuttondisabled");
-		document.getElementById(id).classList.remove("guessbutton");
-	} else {
-		wrongQuess();
-	}
-}
 
-function randomNumber() {
-    correctAnswers++;
-    if(correctAnswers==25){
-    gameOver();
-    }
-    else{
-    var isFound = false;
-    	while(!isFound) {
-    		var randomNumber = Math.floor(Math.random()*25);
-    		wantedNumber = randomArrayNumbers[randomNumber];
-    		if(wantedNumber!=null){
-    			isFound=true;
-    			randomArrayNumbers[randomNumber] = null;
-    		}
-    }	
-	document.getElementById('infoRandomNumber').innerHTML = "PRODUCT: " + wantedNumber;
-	document.getElementById('infoCorrectAnswers').innerHTML = " CORRECT: " + correctAnswers + "/25";
-	}
-}
-	
-function wrongQuess() {
-	if(vibrationOff==0){
-	navigator.vibrate(500);	// Vibrate for 0.5 seconds
-	}
-}
 
-	
-function gameOver(){
-			  alert('You have finished the game');	
+		function quessClick(num, id) {
+			if (num == wantedNumber) {
+				randomNumber();
+				document.getElementById(id).removeAttribute("onmousedown");
+				document.getElementById(id).classList.add("guessbuttondisabled");
+				document.getElementById(id).classList.remove("guessbutton");
+			} else {
+				wrongQuess();
+			}
+		}
+
+		function randomNumber() {
+			correctAnswers++;
+			if (correctAnswers == 25) {
+				gameOver();
+			}
+			else {
+				var isFound = false;
+				while (!isFound) {
+					var randomNumber = Math.floor(Math.random() * 25);
+					wantedNumber = randomArrayNumbers[randomNumber];
+					if (wantedNumber != null) {
+						isFound = true;
+						randomArrayNumbers[randomNumber] = null;
+					}
+				}
+				document.getElementById('infoRandomNumber').innerHTML = "PRODUCT: " + wantedNumber;
+				document.getElementById('infoCorrectAnswers').innerHTML = " CORRECT: " + correctAnswers + "/25";
+			}
+		}
+
+		function wrongQuess() {
+			if (vibrationOff == 0) {
+				navigator.vibrate(500);	// Vibrate for 0.5 seconds
+			}
+		}
+
+
+		function gameOver() {
+			alert('You have finished the game');
 			exit()
-}
+		}
 
-function exit() {
-	window.history.back();
-}
-    </script>
-  
-  </body>
+		function exit() {
+			window.history.back();
+		}
+	</script>
+
+</body>
+
 </html>

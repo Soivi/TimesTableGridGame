@@ -1,115 +1,114 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Times Table Grid Game</title>
-    
-        <meta charset="utf-8" />
+
+<head>
+	<title>Times Table Grid Game</title>
+
+	<meta charset="utf-8" />
 	<link href="../styles/default.css" rel="stylesheet" type="text/css" />
-    <script type="text/javascript" charset="utf-8">
-	var endingTime = new Date().getTime() + 40000;
-	var xMultiplication =33;
-	var yMultiplication = 47;
-	var difficultyTable = 5;
+	<script type="text/javascript" charset="utf-8">
+		var endingTime = new Date().getTime() + 40000;
+		var xMultiplication = 33;
+		var yMultiplication = 47;
+		var difficultyTable = 5;
 
-    </script>
-  </head>
-  <body>
-  <p><div id="infoTime"></div>   <div id='infoCorrectAnswers'>&nbsp;</div><br /></p>
-  <div id='infoRandomNumber'>&nbsp;</div> 
-  
-  <table id="theTable"> </table>
-  
-    <script type="text/javascript" charset="utf-8">
-	function startTime(){
-	document.getElementById('infoTime').innerHTML= "Time: " + Math.round((endingTime - new Date().getTime())/1000);
-	if((endingTime - new Date().getTime())<0){
-	timeOver();
-}		
-	t=setTimeout(function(){startTime()},500);
-	}
+	</script>
+</head>
 
+<body>
+	<p>
+		<div id="infoTime"></div>
+		<div id='infoCorrectAnswers'>&nbsp;</div><br />
+	</p>
+	<div id='infoRandomNumber'>&nbsp;</div>
 
-function randomNumber() {
-    correctAnswers++;
-    if(correctAnswers==10){
-    gameOver();
-    }
-    else{
-    var isFound = false;
-    	while(!isFound) {
-    		var randomNumber = Math.floor(Math.random()*25);
-    		wantedNumber = randomArrayNumbers[randomNumber];
-    		if(wantedNumber!=null){
-    			isFound=true;
-    			randomArrayNumbers[randomNumber] = null;
-    		}
-    }	
-	document.getElementById('infoRandomNumber').innerHTML = "PRODUCT: " + wantedNumber;
-	document.getElementById('infoCorrectAnswers').innerHTML = " CORRECT: " + correctAnswers + "/10";
-	}
-}
-	
-function wrongQuess() {
-	if(vibrationOff==0){
-		navigator.vibrate(500);	// Vibrate for 0.5 seconds
-	}
-	endingTime= endingTime-5000;
-}
-	
-function gameOver(){
-	totalTime = (endingTime - new Date().getTime())/1000;
-        db.transaction(queryDB, errorCB);
-}
+	<table id="theTable"> </table>
 
-function timeOver(){
-			  alert('Your time has run out!!!');
-}
-
-	function exit() {
-		window.history.back();
-	}
-
- // Populate the database 
-    //
-    function populateDB(tx) {
-	tx.executeSql('UPDATE HIGHSCORESTABLE SET data="'+totalTime+'" WHERE id='+difficultyTable+'');
-	db.transaction(exit);
-    }
-
-    // Query the database
-    //
-    function queryDB(tx) {
-        tx.executeSql('SELECT * FROM HIGHSCORESTABLE', [], querySuccess, errorCB);
-    }
-
-    // Query the success callback
-    //
-    function querySuccess(tx, results) {
-	yourBestTime = results.rows.item(difficultyTable).data;	
-	if(yourBestTime == 0) {
-			alert('You made the impossible possible!!! Your time was ' + totalTime + ' sec. Have a cookie!');	
-			db.transaction(populateDB, errorCB);         // callback
+	<script type="text/javascript" charset="utf-8">
+		function startTime() {
+			document.getElementById('infoTime').innerHTML = "Time: " + Math.round((endingTime - new Date().getTime()) / 1000);
+			if ((endingTime - new Date().getTime()) < 0) {
+				timeOver();
+			}
+			t = setTimeout(function () { startTime() }, 500);
 		}
-	else if (totalTime > yourBestTime) {
-			  alert('You made a new record. Your time was ' + totalTime + ' sec');	
-			db.transaction(populateDB, errorCB);
+
+		function randomNumber() {
+			correctAnswers++;
+			if (correctAnswers == 10) {
+				gameOver();
+			}
+			else {
+				var isFound = false;
+				while (!isFound) {
+					var randomNumber = Math.floor(Math.random() * 25);
+					wantedNumber = randomArrayNumbers[randomNumber];
+					if (wantedNumber != null) {
+						isFound = true;
+						randomArrayNumbers[randomNumber] = null;
+					}
+				}
+				document.getElementById('infoRandomNumber').innerHTML = "PRODUCT: " + wantedNumber;
+				document.getElementById('infoCorrectAnswers').innerHTML = " CORRECT: " + correctAnswers + "/10";
+			}
 		}
-	else {
-		       alert('Your time was ' + totalTime + ' sec.');	
-			exit();
+
+		function wrongQuess() {
+			if (vibrationOff == 0) {
+				navigator.vibrate(500);	// Vibrate for 0.5 seconds
+			}
+			endingTime = endingTime - 5000;
 		}
-    }
 
-    // Transaction error callback
-    //
-    function errorCB(err) {q
-        console.log("Error processing SQL: "+err.code);
-    }
+		function gameOver() {
+			totalTime = (endingTime - new Date().getTime()) / 1000;
+			db.transaction(queryDB, errorCB);
+		}
 
-    </script>
+		function timeOver() {
+			alert('Your time has run out!!!');
+		}
 
-    <script type="text/javascript" charset="utf-8" src="../js/createTable.js"></script>
-    <script type="text/javascript" charset="utf-8" src="../js/options.js"></script>
-    <script type="text/javascript" charset="utf-8" src="../js/deviceReady.js"></script>
-  </body>
+		function exit() {
+			window.history.back();
+		}
+
+		// Populate the database 
+		function populateDB(tx) {
+			tx.executeSql('UPDATE HIGHSCORESTABLE SET data="' + totalTime + '" WHERE id=' + difficultyTable + '');
+			db.transaction(exit);
+		}
+
+		// Query the database
+		function queryDB(tx) {
+			tx.executeSql('SELECT * FROM HIGHSCORESTABLE', [], querySuccess, errorCB);
+		}
+
+		// Query the success callback
+		function querySuccess(tx, results) {
+			yourBestTime = results.rows.item(difficultyTable).data;
+			if (yourBestTime == 0) {
+				alert('You made the impossible possible!!! Your time was ' + totalTime + ' sec. Have a cookie!');
+				db.transaction(populateDB, errorCB);         // callback
+			}
+			else if (totalTime > yourBestTime) {
+				alert('You made a new record. Your time was ' + totalTime + ' sec');
+				db.transaction(populateDB, errorCB);
+			}
+			else {
+				alert('Your time was ' + totalTime + ' sec.');
+				exit();
+			}
+		}
+
+		// Transaction error callback
+		function errorCB(err) {
+			console.log("Error processing SQL: " + err.code);
+		}
+	</script>
+	<script type="text/javascript" charset="utf-8" src="../js/createTable.js"></script>
+	<script type="text/javascript" charset="utf-8" src="../js/options.js"></script>
+	<script type="text/javascript" charset="utf-8" src="../js/deviceReady.js"></script>
+</body>
+
 </html>
