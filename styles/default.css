@@ -138,13 +138,13 @@ button {
 
 #infoCorrectAnswers {
 	float:right;
-	color:rgb(0,150,0);
+	color:rgb(10, 199, 54);
 	font-size:150%;
 }
 
 #infoRandomNumber {
 	font-size:200%;
-	color:rgb(190,0,0);
+	color:rgb(230,53,69);
 	text-align:center;
 }
 
