@@ -1,81 +1,80 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Block 2</title>
 
-        <meta charset="utf-8" />
+<head>
+	<title>Block 2</title>
+
+	<meta charset="utf-8" />
 	<link href="../styles/default.css" rel="stylesheet" type="text/css" />
 
-    <script type="text/javascript" charset="utf-8">
+	<script type="text/javascript" charset="utf-8">
 
-        var db = window.openDatabase("Database", "1.0", "Cordova", 200000);
-	var unlockSeconds = 15;
-        db.transaction(queryDB, errorCB);
+		var db = window.openDatabase("Database", "1.0", "Cordova", 200000);
+		var unlockSeconds = 15;
+		db.transaction(queryDB, errorCB);
 
-    // Query the database
-    //
-    function queryDB(tx) {
-        tx.executeSql('SELECT * FROM HIGHSCORESTABLE', [], querySuccess, errorCB);
-    }
-
-    // Query the success callback
-    //
-    function querySuccess(tx, results) {
-		if (results.rows.item(16).data >= unlockSeconds) {
-		document.getElementById("Button2").disabled=false;
-		}
-		if (results.rows.item(17).data >= unlockSeconds) {
-		document.getElementById("Button3").disabled=false;
-		}
-		if (results.rows.item(18).data >= unlockSeconds) {
-		document.getElementById("Button4").disabled=false;
-		}
-		if(results.rows.item(19).data >= unlockSeconds) {
-		document.getElementById("Button5").disabled=false;
-		}
-		if (results.rows.item(20).data >= unlockSeconds) {
-		document.getElementById("Button6").disabled=false;
-		}
-		if (results.rows.item(21).data >= unlockSeconds) {
-		document.getElementById("Button7").disabled=false;
-		}
-		if (results.rows.item(22).data >= unlockSeconds) {
-		document.getElementById("Button8").disabled=false;
-		}
-		if(results.rows.item(23).data >= unlockSeconds) {
-		document.getElementById("Button9").disabled=false;
-		}
-		if(results.rows.item(24).data >= unlockSeconds) {
-		document.getElementById("Button10").disabled=false;
+		// Query the database
+		function queryDB(tx) {
+			tx.executeSql('SELECT * FROM HIGHSCORESTABLE', [], querySuccess, errorCB);
 		}
 
-    }
+		// Query the success callback
+		function querySuccess(tx, results) {
+			if (results.rows.item(16).data >= unlockSeconds) {
+				document.getElementById("Button2").disabled = false;
+			}
+			if (results.rows.item(17).data >= unlockSeconds) {
+				document.getElementById("Button3").disabled = false;
+			}
+			if (results.rows.item(18).data >= unlockSeconds) {
+				document.getElementById("Button4").disabled = false;
+			}
+			if (results.rows.item(19).data >= unlockSeconds) {
+				document.getElementById("Button5").disabled = false;
+			}
+			if (results.rows.item(20).data >= unlockSeconds) {
+				document.getElementById("Button6").disabled = false;
+			}
+			if (results.rows.item(21).data >= unlockSeconds) {
+				document.getElementById("Button7").disabled = false;
+			}
+			if (results.rows.item(22).data >= unlockSeconds) {
+				document.getElementById("Button8").disabled = false;
+			}
+			if (results.rows.item(23).data >= unlockSeconds) {
+				document.getElementById("Button9").disabled = false;
+			}
+			if (results.rows.item(24).data >= unlockSeconds) {
+				document.getElementById("Button10").disabled = false;
+			}
 
-    // Transaction error callback
-    //
-    function errorCB(err) {
-        console.log("Error processing SQL: "+err.code);
-    }
-    </script>
-  </head>
-  <body style="background-image:url(../pictures/background.png);">
+		}
+
+		// Transaction error callback
+		function errorCB(err) {
+			console.log("Error processing SQL: " + err.code);
+		}
+	</script>
+</head>
+
+<body style="background-image:url(../pictures/background.png);">
 
 	<div class="indexButtons">
-	 <a href="block2Info.html"><button>Block 2 Info</button></a>
+		<a href="block2Info.html"><button>Block 2 Info</button></a>
 	</div>
 
-<div class="blockButtons">
-	 <a href="level2_1.html"><button id="Button1">1</button></a>
-	 <a href="level2_2.html"><button disabled id="Button2">2</button></a>
-	 <a href="level2_3.html"><button disabled id="Button3">3</button></a>
-	 <a href="level2_4.html"><button disabled id="Button4">4</button></a>
-	 <a href="level2_5.html"><button disabled id="Button5">5</button></a>
-	 <a href="level2_6.html"><button disabled id="Button6">6</button></a>
-	 <a href="level2_7.html"><button disabled id="Button7">7</button></a>
-	 <a href="level2_8.html"><button disabled id="Button8">8</button></a>
-	 <a href="level2_9.html"><button disabled id="Button9">9</button></a>
-	 <a href="level2_10.html"><button disabled id="Button10">10</button></a>
-</div>
-  </body>
-</html>
+	<div class="blockButtons">
+		<a href="level2_1.html"><button id="Button1">1</button></a>
+		<a href="level2_2.html"><button disabled id="Button2">2</button></a>
+		<a href="level2_3.html"><button disabled id="Button3">3</button></a>
+		<a href="level2_4.html"><button disabled id="Button4">4</button></a>
+		<a href="level2_5.html"><button disabled id="Button5">5</button></a>
+		<a href="level2_6.html"><button disabled id="Button6">6</button></a>
+		<a href="level2_7.html"><button disabled id="Button7">7</button></a>
+		<a href="level2_8.html"><button disabled id="Button8">8</button></a>
+		<a href="level2_9.html"><button disabled id="Button9">9</button></a>
+		<a href="level2_10.html"><button disabled id="Button10">10</button></a>
+	</div>
+</body>
 
+</html>
