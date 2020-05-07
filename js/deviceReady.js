@@ -12,6 +12,7 @@ function quessClick(num, id) {
 	if (num == wantedNumber) {
 		randomNumber();
 		document.getElementById(id).removeAttribute("onmousedown");
+		document.getElementById(id).removeAttribute("name"); // Selenium testing
 		document.getElementById(id).classList.add("guessbuttondisabled");
 		document.getElementById(id).classList.remove("guessbutton");
 	} else {

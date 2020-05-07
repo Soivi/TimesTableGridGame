@@ -22,6 +22,7 @@
 		var db = window.openDatabase("Database", "1.0", "Cordova", 200000);
 		var wantedNumber;
 		var correctAnswers = -1;
+		var answersToWin = 25;
 		var xMultiplication = 1;
 		var yMultiplication = 1;
 		var randomArrayNumbers = new Array();
@@ -35,6 +36,7 @@
 			if (num == wantedNumber) {
 				randomNumber();
 				document.getElementById(id).removeAttribute("onmousedown");
+				document.getElementById(id).removeAttribute("name"); // Selenium testing
 				document.getElementById(id).classList.add("guessbuttondisabled");
 				document.getElementById(id).classList.remove("guessbutton");
 			} else {
@@ -44,13 +46,13 @@
 
 		function randomNumber() {
 			correctAnswers++;
-			if (correctAnswers == 25) {
+			if (correctAnswers == answersToWin) {
 				gameOver();
 			}
 			else {
 				var isFound = false;
 				while (!isFound) {
-					var randomNumber = Math.floor(Math.random() * 25);
+					var randomNumber = Math.floor(Math.random() * answersToWin);
 					wantedNumber = randomArrayNumbers[randomNumber];
 					if (wantedNumber != null) {
 						isFound = true;
@@ -58,7 +60,7 @@
 					}
 				}
 				document.getElementById('infoRandomNumber').innerHTML = "PRODUCT: " + wantedNumber;
-				document.getElementById('infoCorrectAnswers').innerHTML = " CORRECT: " + correctAnswers + "/25";
+				document.getElementById('infoCorrectAnswers').innerHTML = " CORRECT: " + correctAnswers + "/" + answersToWin;
 			}
 		}
 

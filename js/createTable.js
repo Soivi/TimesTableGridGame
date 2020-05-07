@@ -33,6 +33,7 @@ function makeTable() {
 
 			newTd.setAttribute('class', 'guessbutton');
 			newTd.setAttribute('id', cellNum);
+			newTd.setAttribute('name', (i + yMultiplication) * (k + xMultiplication)); // For selenium testing
 			newTd.setAttribute('onmousedown', 'quessClick(' + (i + yMultiplication) * (k + xMultiplication) + ', ' + cellNum + ')');
 
 			randomArrayNumbers[t] = (i + yMultiplication) * (k + xMultiplication);
