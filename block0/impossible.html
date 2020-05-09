@@ -7,10 +7,10 @@
 	<meta charset="utf-8" />
 	<link href="../styles/default.css" rel="stylesheet" type="text/css" />
 	<script type="text/javascript" charset="utf-8">
-		var endingTime = new Date().getTime() + 40000;
-		var xMultiplication = 33;
-		var yMultiplication = 47;
-		var difficultyTable = 5;
+		let endingTime = new Date().getTime() + 40000;
+		let xMultiplication = 33;
+		let yMultiplication = 47;
+		let difficultyTable = 5;
 
 	</script>
 </head>
@@ -39,9 +39,9 @@
 				gameOver();
 			}
 			else {
-				var isFound = false;
+				let isFound = false;
 				while (!isFound) {
-					var randomNumber = Math.floor(Math.random() * 25);
+					let randomNumber = Math.floor(Math.random() * 25);
 					wantedNumber = randomArrayNumbers[randomNumber];
 					if (wantedNumber != null) {
 						isFound = true;

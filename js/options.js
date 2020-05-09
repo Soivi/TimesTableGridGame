@@ -1,4 +1,4 @@
-var vibrationOff = 0;
+let vibrationOff = 0;
 
 function queryDBVibrationOff(tx) {
     tx.executeSql('SELECT * FROM HIGHSCORESTABLE', [], querySuccessVibrationOff, errorCBVibrationOff);

@@ -19,13 +19,13 @@
 	<script type="text/javascript" charset="utf-8" src="../js/options.js"></script>
 	<script type="text/javascript" charset="utf-8">
 
-		var db = window.openDatabase("Database", "1.0", "Cordova", 200000);
-		var wantedNumber;
-		var correctAnswers = -1;
-		var answersToWin = 25;
-		var xMultiplication = 1;
-		var yMultiplication = 1;
-		var randomArrayNumbers = new Array();
+		let db = window.openDatabase("Database", "1.0", "Cordova", 200000);
+		let wantedNumber;
+		let correctAnswers = -1;
+		let answersToWin = 25;
+		let xMultiplication = 1;
+		let yMultiplication = 1;
+		let randomArrayNumbers = new Array();
 
 		db.transaction(queryDBVibrationOff, errorCBVibrationOff);
 		makeTable();
@@ -50,9 +50,9 @@
 				gameOver();
 			}
 			else {
-				var isFound = false;
+				let isFound = false;
 				while (!isFound) {
-					var randomNumber = Math.floor(Math.random() * answersToWin);
+					let randomNumber = Math.floor(Math.random() * answersToWin);
 					wantedNumber = randomArrayNumbers[randomNumber];
 					if (wantedNumber != null) {
 						isFound = true;

@@ -1,9 +1,9 @@
-var wantedNumber;
-var db = window.openDatabase("Database", "1.0", "Cordova", 200000);
-var randomArrayNumbers = new Array();
-var yourBestTime = 0;
-var totalTime = 0;
-var correctAnswers = -1;
+let wantedNumber;
+let db = window.openDatabase("Database", "1.0", "Cordova", 200000);
+let randomArrayNumbers = new Array();
+let yourBestTime = 0;
+let totalTime = 0;
+let correctAnswers = -1;
 
 db.transaction(queryDBVibrationOff, errorCBVibrationOff);
 makeTable();

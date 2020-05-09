@@ -9,8 +9,8 @@
 
 	<script type="text/javascript" charset="utf-8">
 
-		var db = window.openDatabase("Database", "1.0", "Cordova", 200000);
-		var allTimes = 0;
+		let db = window.openDatabase("Database", "1.0", "Cordova", 200000);
+		let allTimes = 0;
 
 		db.transaction(queryDB, errorCB);
 
@@ -85,7 +85,7 @@
 			if (results.rows.item(15).data == 0) {
 				totalTime.innerHTML = 'No record'
 			} else {
-				for (var i = 6; i <= 15; i++) {
+				for (let i = 6; i <= 15; i++) {
 					allTimes = parseFloat(results.rows.item(i).data) + allTimes;
 				}
 				totalTime.innerHTML = Math.round((allTimes * 100)) / 100 + ' sec';

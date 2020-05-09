@@ -4,9 +4,9 @@ function randomNumber() {
 		gameOver();
 	}
 	else {
-		var isFound = false;
+		let isFound = false;
 		while (!isFound) {
-			var randomNumber = Math.floor(Math.random() * 25);
+			let randomNumber = Math.floor(Math.random() * 25);
 			wantedNumber = randomArrayNumbers[randomNumber];
 			if (wantedNumber != null) {
 				isFound = true;

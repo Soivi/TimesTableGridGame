@@ -18,8 +18,8 @@
 	</div>
 
 	<script type="text/javascript" charset="utf-8">
-		var allTimesBlock = 0;
-		var db = window.openDatabase("Database", "1.0", "Cordova", 200000);
+		let allTimesBlock = 0;
+		let db = window.openDatabase("Database", "1.0", "Cordova", 200000);
 		db.transaction(populateDB, errorCB, successCB);
 		db.transaction(queryDB, errorCB);
 		db.transaction(populateDBblocks, errorCB);
@@ -44,7 +44,7 @@
 			tx.executeSql('CREATE TABLE IF NOT EXISTS HIGHSCORESTABLE (id unique, data)');
 
 			tx.executeSql('INSERT OR IGNORE INTO HIGHSCORESTABLE (id, data) VALUES (0, 0)');
-			for (var i = 1; i <= 25; i++) {
+			for (let i = 1; i <= 25; i++) {
 				tx.executeSql('INSERT OR IGNORE INTO HIGHSCORESTABLE (id, data) VALUES (' + i + ', 0)');
 			}
 		}
@@ -55,7 +55,7 @@
 
 		function querySuccess(tx, results) {
 			if (results.rows.item(15).data != 0) {
-				for (var i = 6; i <= 15; i++) {
+				for (let i = 6; i <= 15; i++) {
 					allTimesBlock = parseFloat(results.rows.item(i).data) + allTimesBlock;
 				}
 			}

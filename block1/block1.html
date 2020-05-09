@@ -9,8 +9,8 @@
 
 	<script type="text/javascript" charset="utf-8">
 
-		var db = window.openDatabase("Database", "1.0", "Cordova", 200000);
-		var unlockSeconds = 120;
+		let db = window.openDatabase("Database", "1.0", "Cordova", 200000);
+		let unlockSeconds = 120;
 		db.transaction(queryDB, errorCB);
 
 		// Query the database

@@ -25,9 +25,9 @@ function querySuccess(tx, results) {
 	yourBestTime = results.rows.item(difficultyTable).data;
 	if (totalTime < yourBestTime || yourBestTime == 0) {
 		if (results.rows.item(15).data != 0 || (difficultyTable == 15 && results.rows.item(15).data == 0)) {
-			var allTimesBlock = 0;
-			var newAllTimesBlock = 0;
-			for (var i = 6; i <= 15; i++) {
+			let allTimesBlock = 0;
+			let newAllTimesBlock = 0;
+			for (let i = 6; i <= 15; i++) {
 				allTimesBlock = parseFloat(results.rows.item(i).data) + allTimesBlock;
 			}
 			newAllTimesBlock = allTimesBlock - parseFloat(yourBestTime) + parseFloat(totalTime);
