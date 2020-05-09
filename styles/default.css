@@ -21,10 +21,10 @@ html {
 	
 	width:80%;
 	border:3px solid;
-	border-radius:15px;
+	border-radius:12px;
 	margin-top:3%;
-	color:rgb(255,255,255);
-	padding:5%;
+	color:rgb(235,238,239);
+	padding:4%;
 }	
 
 .indexButtons button:disabled
@@ -42,9 +42,13 @@ html {
 	border:3px solid rgb(200,200,200);
 }
 
+.indexButtons button {
+	font-size:150%;
+	font-weight: 600;
+}
+
 .indexButtons {
 	text-align:center;
-	font-size:150%;
 }
 
 .indexButtons a {
@@ -88,10 +92,10 @@ button {
 
 	width:40%;
 	border:3px solid;
-	border-radius:15px;
+	border-radius:12px;
 	margin-top:3%;
-	color:rgb(255,255,255);
-	padding:5%;
+	color:rgb(235,238,239);
+	padding:4%;
 }	
 
 .blockButtons button:disabled
@@ -109,9 +113,13 @@ button {
 	border:3px solid rgb(200,200,200);
 }
 
+.blockButtons button {
+	font-size:150%;
+	font-weight: 600;
+}
+
 .blockButtons {
 	text-align:center;
-	font-size:150%;
 }
 
 .blockButtons a {
