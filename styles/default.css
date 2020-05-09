@@ -66,10 +66,17 @@ button {
 
 .highscores {
 	font-size:200%;
+	color:rgb(235,238,239);
 }
 
 .highscoresText {
 	font-size:150%;
+	color:rgb(235,238,239);
+	font-weight: 600;
+}
+
+.highscoresTable {
+	width: 100%;
 }
 
 .blockButtons button {
