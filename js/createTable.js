@@ -39,8 +39,8 @@ function makeTable() {
 			randomArrayNumbers[t] = (i + yMultiplication) * (k + xMultiplication);
 			t++;
 			//For debugging. Give answers to buttons
-			//let answer = document.createTextNode((i+yMultiplication)*(k+xMultiplication));
-			//newTd.appendChild(answer);
+			let answer = document.createTextNode((i+yMultiplication)*(k+xMultiplication));
+			newTd.appendChild(answer);
 
 			newTr.appendChild(newTd);
 			cellNum++;
