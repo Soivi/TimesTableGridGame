@@ -1,11 +1,13 @@
 function startTime() {
 	document.getElementById('infoTime').innerHTML = "Time: " + Math.round((endingTime - new Date().getTime()) / 1000);
-	if ((endingTime - new Date().getTime()) < 0) {
-		timeOver();
+	if(correctAnswers < answersToWin) {
+		if ((endingTime - new Date().getTime()) < 0) {
+			timeOver();
+		} else {
+			t = setTimeout(function () { startTime() }, 500);
+		}
 	}
-	t = setTimeout(function () { startTime() }, 500);
 }
-
 
 function timeOver() {
 	gameOver();

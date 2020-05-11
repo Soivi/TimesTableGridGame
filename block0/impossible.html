@@ -11,6 +11,7 @@
 		let xMultiplication = 33;
 		let yMultiplication = 47;
 		let difficultyTable = 5;
+		let answersToWin = 10;
 
 	</script>
 </head>
@@ -27,15 +28,18 @@
 	<script type="text/javascript" charset="utf-8">
 		function startTime() {
 			document.getElementById('infoTime').innerHTML = "Time: " + Math.round((endingTime - new Date().getTime()) / 1000);
-			if ((endingTime - new Date().getTime()) < 0) {
-				timeOver();
+			if(correctAnswers < answersToWin) {
+				if ((endingTime - new Date().getTime()) < 0) {
+					timeOver();
+				} else {
+				t = setTimeout(function () { startTime() }, 500);
+				}
 			}
-			t = setTimeout(function () { startTime() }, 500);
 		}
 
 		function randomNumber() {
 			correctAnswers++;
-			if (correctAnswers == 10) {
+			if (correctAnswers == answersToWin) {
 				gameOver();
 			}
 			else {
@@ -49,7 +53,7 @@
 					}
 				}
 				document.getElementById('infoRandomNumber').innerHTML = "PRODUCT: " + wantedNumber;
-				document.getElementById('infoCorrectAnswers').innerHTML = " CORRECT: " + correctAnswers + "/10";
+				document.getElementById('infoCorrectAnswers').innerHTML = " CORRECT: " + correctAnswers + "/" + answersToWin;
 			}
 		}
 
@@ -67,6 +71,7 @@
 
 		function timeOver() {
 			alert('Your time has run out!!!');
+			exit();
 		}
 
 		function exit() {

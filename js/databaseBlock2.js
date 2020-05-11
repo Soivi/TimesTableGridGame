@@ -20,16 +20,16 @@ function queryDB(tx) {
 function querySuccess(tx, results) {
 	yourBestTime = results.rows.item(difficultyTable).data;
 	if (correctAnswers > yourBestTime) {
+		alert('You made a new record. You got ' + correctAnswers + ' correct');
+		db.transaction(populateDB, errorCB)
 		if (difficultyTable != 25) {
 			if (correctAnswers >= unlockNextLevel && yourBestTime < unlockNextLevel) {
 				alert('You opened a new level');
 				doNothing();
 			}
 		}
-		alert('You made a new record. You got ' + correctAnswers + ' correct');
-		db.transaction(populateDB, errorCB)
 	}
-	else if (correctAnswers == 25 && yourBestTime == 25) {
+	else if (correctAnswers == answersToWin && yourBestTime == answersToWin) {
 		alert('Time to face harder levels?');
 		db.transaction(populateDB, errorCB);
 	}
