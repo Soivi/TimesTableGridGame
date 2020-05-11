@@ -27,11 +27,6 @@
 		let yMultiplication = 1;
 		let randomArrayNumbers = new Array();
 
-		db.transaction(queryDBVibrationOff, errorCBVibrationOff);
-		makeTable();
-		randomNumber();
-
-
 		function quessClick(num, id) {
 			if (num == wantedNumber) {
 				randomNumber();
@@ -39,8 +34,12 @@
 				document.getElementById(id).removeAttribute("name"); // Selenium testing
 				document.getElementById(id).classList.add("guessbuttondisabled");
 				document.getElementById(id).classList.remove("guessbutton");
+				if (correctAnswers <= 3) {
+					alert("Well done! You clicked the right cell to produce number " + num);
+				}
 			} else {
 				wrongQuess();
+				alert("Wrong cell, this cell produced " + num + ". You need to produce " + wantedNumber);
 			}
 		}
 
@@ -70,7 +69,6 @@
 			}
 		}
 
-
 		function gameOver() {
 			alert('You have finished the game');
 			exit()
@@ -79,8 +77,16 @@
 		function exit() {
 			window.history.back();
 		}
-	</script>
 
+		db.transaction(queryDBVibrationOff, errorCBVibrationOff);
+		makeTable();
+		randomNumber();
+
+		setTimeout(function () {
+			alert("Above you can see the text PRODUCT and number " + wantedNumber +
+			". Click a number in the grid that produces this multiplication");
+		}, 3000);
+	</script>
 </body>
 
 </html>
