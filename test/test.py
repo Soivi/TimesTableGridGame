@@ -39,12 +39,16 @@ def testPractice():
 	driver.find_element_by_id("block0Button").click()
 	driver.find_element_by_id("practiceButton").click()
 
+	time.sleep(5)
+	driver.switch_to.alert.accept()
 	correctAnswers = driver.execute_script("return correctAnswers")
 	answersToWin = driver.execute_script("return answersToWin")
 	while True:
 		wantedNumber = driver.execute_script("return wantedNumber")
 		driver.find_element_by_name(wantedNumber).click()
 		time.sleep(0.2) # Wait javascript to run
+		if correctAnswers <= 2:
+			driver.switch_to.alert.accept()
 		if correctAnswers == answersToWin - 1:
 			break
 		correctAnswers = driver.execute_script("return correctAnswers")
