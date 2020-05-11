@@ -160,6 +160,7 @@ def main():
 	testHighScore(block, maxLevels, False)
 	testBlock1(maxLevels)
 	testHighScore(block, maxLevels, True)
+	print("All test cases passed")
 
 main()
 driver.close()
