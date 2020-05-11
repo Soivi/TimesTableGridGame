@@ -24,6 +24,8 @@ function queryDB(tx) {
 function querySuccess(tx, results) {
 	yourBestTime = results.rows.item(difficultyTable).data;
 	if (totalTime < yourBestTime || yourBestTime == 0) {
+		alert('You made a new record. Your time was ' + totalTime + ' sec');
+		
 		if (results.rows.item(15).data != 0 || (difficultyTable == 15 && results.rows.item(15).data == 0)) {
 			let allTimesBlock = 0;
 			let newAllTimesBlock = 0;
@@ -44,7 +46,7 @@ function querySuccess(tx, results) {
 				doNothing();
 			}
 		}
-		alert('You made a new record. Your time was ' + totalTime + ' sec');
+		
 		db.transaction(populateDB, errorCB);
 	} else {
 		alert('Your time was ' + totalTime + ' sec');
