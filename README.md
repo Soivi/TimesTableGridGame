@@ -1,5 +1,8 @@
 # TimesTableGridGame
 
+## Live Application
+The application can be tested at: https://soivi.github.io/TimesTableGridGame/
+
 ## Selenium testing
 Install pip and selenium
 ```
