@@ -7,54 +7,49 @@
 	<meta charset="utf-8" />
 	<link href="../styles/default.css" rel="stylesheet" type="text/css" />
 
+	<script type="text/javascript" src="../js/localStorage.js"></script>
 	<script type="text/javascript" charset="utf-8">
 
-		let db = window.openDatabase("Database", "1.0", "Cordova", 200000);
-		db.transaction(queryDB, errorCB);
+		// Initialize localStorage and load high scores
+		document.addEventListener('DOMContentLoaded', function() {
+			initializeLocalStorage();
+			loadHighScores();
+		});
 
-		// Query the database
-		function queryDB(tx) {
-			tx.executeSql('SELECT * FROM HIGHSCORESTABLE', [], querySuccess, errorCB);
-		}
-
-		// Query the success callback
-		function querySuccess(tx, results) {
+		function loadHighScores() {
+			const highscores = getHighScores();
+			
 			easyText.innerHTML = 'Easy:';
 			mediumText.innerHTML = 'Medium:';
 			hardText.innerHTML = 'Hard:';
 			veryHardText.innerHTML = 'Very Hard:';
 			impossibleText.innerHTML = 'Impossible:';
 
-			if (results.rows.item(1).data == 0) {
+			if (highscores[1] == 0) {
 				easyTime.innerHTML = 'No record'
 			} else {
-				easyTime.innerHTML = results.rows.item(1).data + ' sec';
+				easyTime.innerHTML = highscores[1] + ' sec';
 			}
-			if (results.rows.item(2).data == 0) {
+			if (highscores[2] == 0) {
 				mediumTime.innerHTML = 'No record'
 			} else {
-				mediumTime.innerHTML = results.rows.item(2).data + ' sec';
+				mediumTime.innerHTML = highscores[2] + ' sec';
 			}
-			if (results.rows.item(3).data == 0) {
+			if (highscores[3] == 0) {
 				hardTime.innerHTML = 'No record'
 			} else {
-				hardTime.innerHTML = results.rows.item(3).data + ' sec';
-			} if (results.rows.item(4).data == 0) {
+				hardTime.innerHTML = highscores[3] + ' sec';
+			}
+			if (highscores[4] == 0) {
 				veryHardTime.innerHTML = 'No record'
 			} else {
-				veryHardTime.innerHTML = results.rows.item(4).data + ' sec';
+				veryHardTime.innerHTML = highscores[4] + ' sec';
 			}
-			if (results.rows.item(5).data == 0) {
+			if (highscores[5] == 0) {
 				impossibleTime.innerHTML = 'No record'
 			} else {
-				impossibleTime.innerHTML = results.rows.item(5).data + ' sec';
+				impossibleTime.innerHTML = highscores[5] + ' sec';
 			}
-
-		}
-
-		// Transaction error callback
-		function errorCB(err) {
-			console.log("Error processing SQL: " + err.code);
 		}
 	</script>
 </head>

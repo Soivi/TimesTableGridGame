@@ -6,23 +6,20 @@
 
 	<meta charset="utf-8" />
 	<link href="styles/default.css" rel="stylesheet" type="text/css" />
+	<script src="js/localStorage.js"></script>
 
 	<script type="text/javascript" charset="utf-8">
 
-		let db = window.openDatabase("Database", "1.0", "Cordova", 200000);
-		let vibrationVar = 0;
-
 		//document.addEventListener("backbutton", exit, false);
-		db.transaction(queryDB, errorCB);
+		
+		document.addEventListener("DOMContentLoaded", function() {
+			initializeLocalStorage();
+			updateVibrationButtons();
+		});
 
-		// Query the database
-		function queryDB(tx) {
-			tx.executeSql('SELECT * FROM HIGHSCORESTABLE', [], querySuccess, errorCB);
-		}
-
-		// Query the success callback
-		function querySuccess(tx, results) {
-			if (results.rows.item(0).data == 0) {
+		function updateVibrationButtons() {
+			const vibrationSetting = getVibrationSetting();
+			if (vibrationSetting == 1) {
 				document.getElementById("vibrationOn").disabled = true;
 				document.getElementById("vibrationOff").disabled = false;
 			} else {
@@ -32,28 +29,15 @@
 		}
 
 		function vibrationOff(number) {
-			vibrationVar = number;
-			db.transaction(populateDB, errorCB, successCB);
+			setVibrationSetting(number);
+			updateVibrationButtons();
 			if (number == 0) {
 				navigator.vibrate(1000);
 			}
 		}
 
-		// Transaction error callback
-		function errorCB(err) { }
-
-		// Transaction success callback
-		function successCB() {
-			db.transaction(queryDB, errorCB);
-		}
-
 		function exit() {
 			navigator.app.backHistory();
-		}
-
-		// Populate the database
-		function populateDB(tx) {
-			tx.executeSql('UPDATE HIGHSCORESTABLE SET data=' + vibrationVar + ' WHERE id=0');
 		}
 	</script>
 </head>
@@ -62,8 +46,8 @@
 	<img style="margin:0px auto;display:block" src="pictures/optionslogo.png" alt="optionslogo" height="16%"
 		width="70%">
 	<div class="indexButtons">
-		<a onClick="vibrationOff(0)"><button id="vibrationOn">Vibration ON</button></a>
-		<a onClick="vibrationOff(1)"><button id="vibrationOff">Vibration OFF</button></a>
+		<a onClick="vibrationOff(1)"><button id="vibrationOn">Vibration ON</button></a>
+		<a onClick="vibrationOff(0)"><button id="vibrationOff">Vibration OFF</button></a>
 	</div>
 </body>
 

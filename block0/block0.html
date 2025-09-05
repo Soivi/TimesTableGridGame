@@ -6,40 +6,38 @@
 
   <meta charset="utf-8" />
   <link href="../styles/default.css" rel="stylesheet" type="text/css" />
+  <script type="text/javascript" src="../js/localStorage.js"></script>
 
   <script type="text/javascript" charset="utf-8">
-
-    let db = window.openDatabase("Database", "1.0", "Cordova", 200000);
     let unlockSeconds = 40;
-    db.transaction(queryDB, errorCB);
 
-    // Query the database
-    //
-    function queryDB(tx) {
-      tx.executeSql('SELECT * FROM HIGHSCORESTABLE', [], querySuccess, errorCB);
-    }
+    // Initialize localStorage and check unlock status when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+      initializeLocalStorage();
+      checkUnlockStatus();
+    });
 
-    // Query the success callback
-    //
-    function querySuccess(tx, results) {
-      if (results.rows.item(1).data < unlockSeconds && results.rows.item(1).data != 0) {
-        document.getElementById("mediumButton").disabled = false;
+    // Check unlock status using localStorage
+    function checkUnlockStatus() {
+      try {
+        const highscores = getHighScores();
+        
+        // Check each difficulty level (indices 1-4 for easy, medium, hard, very hard, impossible)
+        if (highscores[1] && highscores[1] < unlockSeconds && highscores[1] != 0) {
+          document.getElementById("mediumButton").disabled = false;
+        }
+        if (highscores[2] && highscores[2] < unlockSeconds && highscores[2] != 0) {
+          document.getElementById("hardButton").disabled = false;
+        }
+        if (highscores[3] && highscores[3] < unlockSeconds && highscores[3] != 0) {
+          document.getElementById("veryHardButton").disabled = false;
+        }
+        if (highscores[4] && highscores[4] < unlockSeconds && highscores[4] != 0) {
+          document.getElementById("impossibleButton").disabled = false;
+        }
+      } catch (error) {
+        console.error("Error checking unlock status:", error);
       }
-      if (results.rows.item(2).data < unlockSeconds && results.rows.item(2).data != 0) {
-        document.getElementById("hardButton").disabled = false;
-      }
-      if (results.rows.item(3).data < unlockSeconds && results.rows.item(3).data != 0) {
-        document.getElementById("veryHardButton").disabled = false;
-      }
-      if (results.rows.item(4).data < unlockSeconds && results.rows.item(4).data != 0) {
-        document.getElementById("impossibleButton").disabled = false;
-      }
-    }
-
-    // Transaction error callback
-    //
-    function errorCB(err) {
-      console.log("Error processing SQL: " + err.code);
     }
   </script>
 </head>

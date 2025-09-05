@@ -15,11 +15,11 @@
 
 	<table id="theTable"> </table>
 
+	<script type="text/javascript" charset="utf-8" src="../js/localStorage.js"></script>
 	<script type="text/javascript" charset="utf-8" src="../js/createTable.js"></script>
 	<script type="text/javascript" charset="utf-8" src="../js/options.js"></script>
 	<script type="text/javascript" charset="utf-8">
 
-		let db = window.openDatabase("Database", "1.0", "Cordova", 200000);
 		let wantedNumber;
 		let correctAnswers = -1;
 		let answersToWin = 25;
@@ -64,7 +64,7 @@
 		}
 
 		function wrongQuess() {
-			if (vibrationOff == 0) {
+			if (vibrationOff == 1) {
 				navigator.vibrate(500);	// Vibrate for 0.5 seconds
 			}
 		}
@@ -78,7 +78,8 @@
 			window.history.back();
 		}
 
-		db.transaction(queryDBVibrationOff, errorCBVibrationOff);
+		// Initialize localStorage and load settings
+		initializeLocalStorage();
 		makeTable();
 		randomNumber();
 

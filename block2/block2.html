@@ -6,53 +6,54 @@
 
 	<meta charset="utf-8" />
 	<link href="../styles/default.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="../js/localStorage.js"></script>
 
 	<script type="text/javascript" charset="utf-8">
-
-		let db = window.openDatabase("Database", "1.0", "Cordova", 200000);
 		let unlockSeconds = 15;
-		db.transaction(queryDB, errorCB);
 
-		// Query the database
-		function queryDB(tx) {
-			tx.executeSql('SELECT * FROM HIGHSCORESTABLE', [], querySuccess, errorCB);
-		}
+		// Initialize localStorage and check unlock status when page loads
+		document.addEventListener('DOMContentLoaded', function() {
+			initializeLocalStorage();
+			checkUnlockStatus();
+		});
 
-		// Query the success callback
-		function querySuccess(tx, results) {
-			if (results.rows.item(16).data >= unlockSeconds) {
-				document.getElementById("Button2").disabled = false;
+		// Check unlock status using localStorage
+		function checkUnlockStatus() {
+			try {
+				const highscores = getHighScores();
+				
+				// Check each level (indices 16-24 for block2 levels 1-10)
+				// Block2 uses score-based progression (>= 15 correct answers)
+				if (highscores[16] && highscores[16] >= unlockSeconds) {
+					document.getElementById("Button2").disabled = false;
+				}
+				if (highscores[17] && highscores[17] >= unlockSeconds) {
+					document.getElementById("Button3").disabled = false;
+				}
+				if (highscores[18] && highscores[18] >= unlockSeconds) {
+					document.getElementById("Button4").disabled = false;
+				}
+				if (highscores[19] && highscores[19] >= unlockSeconds) {
+					document.getElementById("Button5").disabled = false;
+				}
+				if (highscores[20] && highscores[20] >= unlockSeconds) {
+					document.getElementById("Button6").disabled = false;
+				}
+				if (highscores[21] && highscores[21] >= unlockSeconds) {
+					document.getElementById("Button7").disabled = false;
+				}
+				if (highscores[22] && highscores[22] >= unlockSeconds) {
+					document.getElementById("Button8").disabled = false;
+				}
+				if (highscores[23] && highscores[23] >= unlockSeconds) {
+					document.getElementById("Button9").disabled = false;
+				}
+				if (highscores[24] && highscores[24] >= unlockSeconds) {
+					document.getElementById("Button10").disabled = false;
+				}
+			} catch (error) {
+				console.error("Error checking unlock status:", error);
 			}
-			if (results.rows.item(17).data >= unlockSeconds) {
-				document.getElementById("Button3").disabled = false;
-			}
-			if (results.rows.item(18).data >= unlockSeconds) {
-				document.getElementById("Button4").disabled = false;
-			}
-			if (results.rows.item(19).data >= unlockSeconds) {
-				document.getElementById("Button5").disabled = false;
-			}
-			if (results.rows.item(20).data >= unlockSeconds) {
-				document.getElementById("Button6").disabled = false;
-			}
-			if (results.rows.item(21).data >= unlockSeconds) {
-				document.getElementById("Button7").disabled = false;
-			}
-			if (results.rows.item(22).data >= unlockSeconds) {
-				document.getElementById("Button8").disabled = false;
-			}
-			if (results.rows.item(23).data >= unlockSeconds) {
-				document.getElementById("Button9").disabled = false;
-			}
-			if (results.rows.item(24).data >= unlockSeconds) {
-				document.getElementById("Button10").disabled = false;
-			}
-
-		}
-
-		// Transaction error callback
-		function errorCB(err) {
-			console.log("Error processing SQL: " + err.code);
 		}
 	</script>
 </head>

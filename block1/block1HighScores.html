@@ -7,20 +7,19 @@
 	<meta charset="utf-8" />
 	<link href="../styles/default.css" rel="stylesheet" type="text/css" />
 
+	<script type="text/javascript" src="../js/localStorage.js"></script>
 	<script type="text/javascript" charset="utf-8">
 
-		let db = window.openDatabase("Database", "1.0", "Cordova", 200000);
-		let allTimes = 0;
+		// Initialize localStorage and load high scores
+		document.addEventListener('DOMContentLoaded', function() {
+			initializeLocalStorage();
+			loadHighScores();
+		});
 
-		db.transaction(queryDB, errorCB);
-
-		// Query the database
-		function queryDB(tx) {
-			tx.executeSql('SELECT * FROM HIGHSCORESTABLE', [], querySuccess, errorCB);
-		}
-
-		// Query the success callback
-		function querySuccess(tx, results) {
+		function loadHighScores() {
+			const highscores = getHighScores();
+			let allTimes = 0;
+			
 			totalText.innerHTML = 'Total time:';
 			level1Text.innerHTML = 'Level 1:';
 			level2Text.innerHTML = 'Level 2:';
@@ -33,68 +32,71 @@
 			level9Text.innerHTML = 'Level 9:';
 			level10Text.innerHTML = 'Level 10:';
 
-			if (results.rows.item(6).data == 0) {
+			if (highscores[6] == 0) {
 				level1Time.innerHTML = 'No record'
 			} else {
-				level1Time.innerHTML = results.rows.item(6).data + ' sec';
+				level1Time.innerHTML = highscores[6] + ' sec';
 			}
-			if (results.rows.item(7).data == 0) {
+			if (highscores[7] == 0) {
 				level2Time.innerHTML = 'No record'
 			} else {
-				level2Time.innerHTML = results.rows.item(7).data + ' sec';
+				level2Time.innerHTML = highscores[7] + ' sec';
 			}
-			if (results.rows.item(8).data == 0) {
+			if (highscores[8] == 0) {
 				level3Time.innerHTML = 'No record'
 			} else {
-				level3Time.innerHTML = results.rows.item(8).data + ' sec';
-			} if (results.rows.item(9).data == 0) {
+				level3Time.innerHTML = highscores[8] + ' sec';
+			}
+			if (highscores[9] == 0) {
 				level4Time.innerHTML = 'No record'
 			} else {
-				level4Time.innerHTML = results.rows.item(9).data + ' sec';
+				level4Time.innerHTML = highscores[9] + ' sec';
 			}
-			if (results.rows.item(10).data == 0) {
+			if (highscores[10] == 0) {
 				level5Time.innerHTML = 'No record'
 			} else {
-				level5Time.innerHTML = results.rows.item(10).data + ' sec';
+				level5Time.innerHTML = highscores[10] + ' sec';
 			}
-			if (results.rows.item(11).data == 0) {
+			if (highscores[11] == 0) {
 				level6Time.innerHTML = 'No record'
 			} else {
-				level6Time.innerHTML = results.rows.item(11).data + ' sec';
+				level6Time.innerHTML = highscores[11] + ' sec';
 			}
-			if (results.rows.item(12).data == 0) {
+			if (highscores[12] == 0) {
 				level7Time.innerHTML = 'No record'
 			} else {
-				level7Time.innerHTML = results.rows.item(12).data + ' sec';
+				level7Time.innerHTML = highscores[12] + ' sec';
 			}
-			if (results.rows.item(13).data == 0) {
+			if (highscores[13] == 0) {
 				level8Time.innerHTML = 'No record'
 			} else {
-				level8Time.innerHTML = results.rows.item(13).data + ' sec';
+				level8Time.innerHTML = highscores[13] + ' sec';
 			}
-			if (results.rows.item(14).data == 0) {
+			if (highscores[14] == 0) {
 				level9Time.innerHTML = 'No record'
 			} else {
-				level9Time.innerHTML = results.rows.item(14).data + ' sec';
+				level9Time.innerHTML = highscores[14] + ' sec';
 			}
-			if (results.rows.item(15).data == 0) {
+			if (highscores[15] == 0) {
 				level10Time.innerHTML = 'No record'
 			} else {
-				level10Time.innerHTML = results.rows.item(15).data + ' sec';
+				level10Time.innerHTML = highscores[15] + ' sec';
 			}
-			if (results.rows.item(15).data == 0) {
+			
+			// Calculate total time
+			let hasAnyRecord = false;
+			for (let i = 6; i <= 15; i++) {
+				if (highscores[i] != 0) {
+					allTimes = parseFloat(highscores[i]) + allTimes;
+					hasAnyRecord = true;
+				}
+			}
+			
+			if (!hasAnyRecord) {
 				totalTime.innerHTML = 'No record'
 			} else {
-				for (let i = 6; i <= 15; i++) {
-					allTimes = parseFloat(results.rows.item(i).data) + allTimes;
-				}
 				totalTime.innerHTML = Math.round((allTimes * 100)) / 100 + ' sec';
 			}
-		}
-
-		// Transaction error callback
-		function errorCB(err) {
-			console.log("Error processing SQL: " + err.code);
 		}
 	</script>
 </head>

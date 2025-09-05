@@ -1,7 +1,9 @@
-// Populate the database 
-function populateDB(tx) {
-	tx.executeSql('UPDATE HIGHSCORESTABLE SET data="' + correctAnswers + '" WHERE id=' + difficultyTable + '');
-	db.transaction(exit);
+// Save high score to localStorage
+function saveHighScore() {
+	const highscores = getHighScores();
+	highscores[difficultyTable] = correctAnswers;
+	saveHighScores(highscores);
+	exit();
 }
 
 function exit() {
@@ -11,35 +13,31 @@ function exit() {
 function doNothing() {
 }
 
-// Query the database
-function queryDB(tx) {
-	tx.executeSql('SELECT * FROM HIGHSCORESTABLE', [], querySuccess, errorCB);
-}
-
-// Query the success callback
-function querySuccess(tx, results) {
-	yourBestTime = results.rows.item(difficultyTable).data;
+// Check high scores and handle game completion
+function checkHighScores() {
+	initializeLocalStorage();
+	const highscores = getHighScores();
+	
+	yourBestTime = highscores[difficultyTable] || 0;
+	
 	if (correctAnswers > yourBestTime) {
 		alert('You made a new record. You got ' + correctAnswers + ' correct');
-		db.transaction(populateDB, errorCB)
+		
 		if (difficultyTable != 25) {
 			if (correctAnswers >= unlockNextLevel && yourBestTime < unlockNextLevel) {
 				alert('You opened a new level');
 				doNothing();
 			}
 		}
+		
+		saveHighScore();
 	}
 	else if (correctAnswers == answersToWin && yourBestTime == answersToWin) {
 		alert('Time to face harder levels?');
-		db.transaction(populateDB, errorCB);
+		saveHighScore();
 	}
 	else {
 		alert('You only got ' + correctAnswers + ' correct');
 		exit();
 	}
-}
-
-// Transaction error callback
-function errorCB(err) {
-	console.log("Error processing SQL: " + err.code);
 }

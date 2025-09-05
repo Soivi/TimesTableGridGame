@@ -1,11 +1,9 @@
 let wantedNumber;
-let db = window.openDatabase("Database", "1.0", "Cordova", 200000);
 let randomArrayNumbers = new Array();
 let yourBestTime = 0;
 let totalTime = 0;
 let correctAnswers = -1;
 
-db.transaction(queryDBVibrationOff, errorCBVibrationOff);
 makeTable();
 
 function quessClick(num, id) {

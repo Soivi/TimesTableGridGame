@@ -7,25 +7,47 @@
   <meta charset="utf-8" />
   <link href="styles/default.css" rel="stylesheet" type="text/css" />
 
+  <script type="text/javascript" charset="utf-8" src="js/localStorage.js"></script>
   <script type="text/javascript" charset="utf-8">
-    let db = window.openDatabase("Database", "1.0", "Cordova", 200000);
-    db.transaction(queryDB, errorCB);
 
-    // Query the database
-    function queryDB(tx) {
-      tx.executeSql('SELECT * FROM BLOCKS', [], querySuccess, errorCB);
-    }
+    // Wait for DOM to load before initializing
+    document.addEventListener("DOMContentLoaded", function () {
+      initializeLocalStorage();
+      loadHighScoresAndCalculateBlocks();
+    });
 
-    // Query the success callback
-    function querySuccess(tx, results) {
-      if (results.rows.item(0).data != 0) {
-        document.getElementById("block2Button").disabled = false;
+    function loadHighScoresAndCalculateBlocks() {
+      try {
+        let totalProgressTime = 0;
+        const highScores = getHighScores();
+        const startLevel = 6;
+        const finalBlockLevel = 15;
+
+        // Check if player has completed level 15 (final level of block 1)
+        if (highScores[finalBlockLevel] && highScores[finalBlockLevel] != 0) {
+          // Sum up completion times from levels 6-15 (block 1 levels)
+          for (let level = startLevel; level <= finalBlockLevel; level++) {
+            if (highScores[level] && highScores[level] > 0) {
+              totalProgressTime += parseFloat(highScores[level]);
+            }
+          }
+          console.log(`Player progress time for levels ${startLevel}-${finalBlockLevel}:`, totalProgressTime);
+        } else {
+          console.log(`Player has not completed level ${finalBlockLevel} yet`);
+        }
+
+        // Calculate block unlock status and enable/disable block 2
+        const block2Button = document.getElementById("block2Button");
+        if (block2Button && calculateBlocks(totalProgressTime)) {
+          block2Button.disabled = false;
+          console.log("Block 2 unlocked for player");
+        } else if (!block2Button) {
+          console.warn("Block 2 button not found in DOM");
+        }
+        // If block2Unlocked is false, block2Button remains disabled
+      } catch (error) {
+        console.error("Error calculating player progress:", error);
       }
-    }
-
-    // Transaction error callback
-    function errorCB(err) {
-      console.log("Error processing SQL: " + err.code);
     }
 
     function exit() {

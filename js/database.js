@@ -1,11 +1,9 @@
-// Populate the database 
-function populateDB(tx) {
-	tx.executeSql('UPDATE HIGHSCORESTABLE SET data="' + totalTime + '" WHERE id=' + difficultyTable + '');
-	db.transaction(exit);
-}
-
-function populateDBblocks(tx) {
-	tx.executeSql('UPDATE BLOCKS SET data="1" WHERE id=0');
+// Save high score to localStorage
+function saveHighScore() {
+	const highscores = getHighScores();
+	highscores[difficultyTable] = totalTime;
+	saveHighScores(highscores);
+	exit();
 }
 
 function exit() {
@@ -15,28 +13,26 @@ function exit() {
 function doNothing() {
 }
 
-// Query the database
-function queryDB(tx) {
-	tx.executeSql('SELECT * FROM HIGHSCORESTABLE', [], querySuccess, errorCB);
-}
-
-// Query the success callback
-function querySuccess(tx, results) {
-	yourBestTime = results.rows.item(difficultyTable).data;
+// Check high scores and handle game completion
+function checkHighScores() {
+	initializeLocalStorage();
+	const highscores = getHighScores();
+	
+	yourBestTime = highscores[difficultyTable] || 0;
+	
 	if (totalTime < yourBestTime || yourBestTime == 0) {
 		alert('You made a new record. Your time was ' + totalTime + ' sec');
 		
-		if (results.rows.item(15).data != 0 || (difficultyTable == 15 && results.rows.item(15).data == 0)) {
+		if (highscores[15] != 0 || (difficultyTable == 15 && highscores[15] == 0)) {
 			let allTimesBlock = 0;
 			let newAllTimesBlock = 0;
 			for (let i = 6; i <= 15; i++) {
-				allTimesBlock = parseFloat(results.rows.item(i).data) + allTimesBlock;
+				allTimesBlock = parseFloat(highscores[i] || 0) + allTimesBlock;
 			}
 			newAllTimesBlock = allTimesBlock - parseFloat(yourBestTime) + parseFloat(totalTime);
 			if ((allTimesBlock > 1000 && newAllTimesBlock <= 1000) ||
-				(results.rows.item(15).data == 0 && newAllTimesBlock <= 1000)) {
+				(highscores[15] == 0 && newAllTimesBlock <= 1000)) {
 				alert('You unlocked a new block');
-				db.transaction(populateDBblocks, errorCB);
 			}
 		}
 
@@ -47,14 +43,9 @@ function querySuccess(tx, results) {
 			}
 		}
 		
-		db.transaction(populateDB, errorCB);
+		saveHighScore();
 	} else {
 		alert('Your time was ' + totalTime + ' sec');
 		exit();
 	}
-}
-
-// Transaction error callback
-function errorCB(err) {
-	console.log("Error processing SQL: " + err.code);
 }

@@ -14,7 +14,7 @@ function timeOver() {
 }
 
 function wrongQuess() {
-	if (vibrationOff == 0) {
+	if (vibrationOff == 1) {
 		navigator.vibrate(500);	// Vibrate for 0.5 seconds
 	}
 	endingTime = endingTime - 5000;
@@ -22,5 +22,5 @@ function wrongQuess() {
 
 function gameOver() {
 	totalTime = (endingTime - new Date().getTime()) / 1000;
-	db.transaction(queryDB, errorCB);
+	checkHighScores();
 }

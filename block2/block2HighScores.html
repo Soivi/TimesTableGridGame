@@ -7,18 +7,18 @@
 	<meta charset="utf-8" />
 	<link href="../styles/default.css" rel="stylesheet" type="text/css" />
 
+	<script type="text/javascript" src="../js/localStorage.js"></script>
 	<script type="text/javascript" charset="utf-8">
 
-		let db = window.openDatabase("Database", "1.0", "Cordova", 200000);
-		db.transaction(queryDB, errorCB);
+		// Initialize localStorage and load high scores
+		document.addEventListener('DOMContentLoaded', function() {
+			initializeLocalStorage();
+			loadHighScores();
+		});
 
-		// Query the database
-		function queryDB(tx) {
-			tx.executeSql('SELECT * FROM HIGHSCORESTABLE', [], querySuccess, errorCB);
-		}
-
-		// Query the success callback
-		function querySuccess(tx, results) {
+		function loadHighScores() {
+			const highscores = getHighScores();
+			
 			level1Text.innerHTML = 'Level 1:';
 			level2Text.innerHTML = 'Level 2:';
 			level3Text.innerHTML = 'Level 3:';
@@ -30,62 +30,58 @@
 			level9Text.innerHTML = 'Level 9:';
 			level10Text.innerHTML = 'Level 10:';
 
-			if (results.rows.item(16).data == 0) {
+			if (highscores[16] == 0) {
 				level1Time.innerHTML = 'No record'
 			} else {
-				level1Time.innerHTML = results.rows.item(16).data + ' cor';
+				level1Time.innerHTML = highscores[16] + ' cor';
 			}
-			if (results.rows.item(17).data == 0) {
+			if (highscores[17] == 0) {
 				level2Time.innerHTML = 'No record'
 			} else {
-				level2Time.innerHTML = results.rows.item(17).data + ' cor';
+				level2Time.innerHTML = highscores[17] + ' cor';
 			}
-			if (results.rows.item(18).data == 0) {
+			if (highscores[18] == 0) {
 				level3Time.innerHTML = 'No record'
 			} else {
-				level3Time.innerHTML = results.rows.item(18).data + ' cor';
-			} if (results.rows.item(19).data == 0) {
+				level3Time.innerHTML = highscores[18] + ' cor';
+			}
+			if (highscores[19] == 0) {
 				level4Time.innerHTML = 'No record'
 			} else {
-				level4Time.innerHTML = results.rows.item(19).data + ' cor';
+				level4Time.innerHTML = highscores[19] + ' cor';
 			}
-			if (results.rows.item(20).data == 0) {
+			if (highscores[20] == 0) {
 				level5Time.innerHTML = 'No record'
 			} else {
-				level5Time.innerHTML = results.rows.item(20).data + ' cor';
+				level5Time.innerHTML = highscores[20] + ' cor';
 			}
-			if (results.rows.item(21).data == 0) {
+			if (highscores[21] == 0) {
 				level6Time.innerHTML = 'No record'
 			} else {
-				level6Time.innerHTML = results.rows.item(21).data + ' cor';
+				level6Time.innerHTML = highscores[21] + ' cor';
 			}
-			if (results.rows.item(22).data == 0) {
+			if (highscores[22] == 0) {
 				level7Time.innerHTML = 'No record'
 			} else {
-				level7Time.innerHTML = results.rows.item(22).data + ' cor';
+				level7Time.innerHTML = highscores[22] + ' cor';
 			}
-			if (results.rows.item(23).data == 0) {
+			if (highscores[23] == 0) {
 				level8Time.innerHTML = 'No record'
 			} else {
-				level8Time.innerHTML = results.rows.item(23).data + ' cor';
+				level8Time.innerHTML = highscores[23] + ' cor';
 			}
-			if (results.rows.item(24).data == 0) {
+			if (highscores[24] == 0) {
 				level9Time.innerHTML = 'No record'
 			} else {
-				level9Time.innerHTML = results.rows.item(24).data + ' cor';
+				level9Time.innerHTML = highscores[24] + ' cor';
 			}
-			if (results.rows.item(25).data == 0) {
+			if (highscores[25] == 0) {
 				level10Time.innerHTML = 'No record'
 			} else {
-				level10Time.innerHTML = results.rows.item(25).data + ' cor';
+				level10Time.innerHTML = highscores[25] + ' cor';
 			}
-
 		}
 
-		// Transaction error callback
-		function errorCB(err) {
-			console.log("Error processing SQL: " + err.code);
-		}
 	</script>
 </head>
 
