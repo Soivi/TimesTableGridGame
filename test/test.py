@@ -1,9 +1,18 @@
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.options import Options
 import time
 import os
 
-driver = webdriver.Chrome()
+chrome_options = Options()
+chrome_options.add_argument("--disable-background-networking")
+chrome_options.add_argument("--disable-background-timer-throttling")
+chrome_options.add_argument("--disable-renderer-backgrounding")
+chrome_options.add_argument("--disable-backgrounding-occluded-windows")
+chrome_options.add_argument("--disable-features=TranslateUI")
+
+driver = webdriver.Chrome(options=chrome_options)
 #driver.get("http://soivi.github.io/TimesTableGridGame")
 driver.get("file://" + os.getcwd() + "/../index.html") # Get local files
 
@@ -11,9 +20,9 @@ delayValue = 0.05
 
 def testOption():
 	# Go to option page
-	driver.find_element_by_id("optionId").click()
-	vibrationOffButton = driver.find_element_by_id("vibrationOff")
-	vibrationOnButton = driver.find_element_by_id("vibrationOn")
+	driver.find_element(By.ID, "optionId").click()
+	vibrationOffButton = driver.find_element(By.ID, "vibrationOff")
+	vibrationOnButton = driver.find_element(By.ID, "vibrationOn")
 
 	# Check is button disabled or off
 	assert(vibrationOffButton.is_enabled() == True)
@@ -35,9 +44,9 @@ def testOption():
 	print("Option site tested")
 
 def testPractice():
-	driver.find_element_by_id("playId").click()
-	driver.find_element_by_id("block0Button").click()
-	driver.find_element_by_id("practiceButton").click()
+	driver.find_element(By.ID, "playId").click()
+	driver.find_element(By.ID, "block0Button").click()
+	driver.find_element(By.ID, "practiceButton").click()
 
 	time.sleep(5)
 	driver.switch_to.alert.accept()
@@ -45,7 +54,7 @@ def testPractice():
 	answersToWin = driver.execute_script("return answersToWin")
 	while True:
 		wantedNumber = driver.execute_script("return wantedNumber")
-		driver.find_element_by_name(wantedNumber).click()
+		driver.find_element(By.NAME, wantedNumber).click()
 		time.sleep(0.2) # Wait javascript to run
 		if correctAnswers <= 2:
 			driver.switch_to.alert.accept()
@@ -58,16 +67,16 @@ def testPractice():
 	print("Practice level tested")
 
 def testEasy():
-	driver.find_element_by_id("playId").click()
-	driver.find_element_by_id("block0Button").click()
-	assert(driver.find_element_by_id("mediumButton").is_enabled() == False)
-	driver.find_element_by_id("easyButton").click()
+	driver.find_element(By.ID, "playId").click()
+	driver.find_element(By.ID, "block0Button").click()
+	assert(driver.find_element(By.ID, "mediumButton").is_enabled() == False)
+	driver.find_element(By.ID, "easyButton").click()
 
 	correctAnswers = driver.execute_script("return correctAnswers")
 	answersToWin = driver.execute_script("return answersToWin")
 	while True:
 		wantedNumber = driver.execute_script("return wantedNumber")
-		driver.find_element_by_name(wantedNumber).click()
+		driver.find_element(By.NAME, wantedNumber).click()
 		time.sleep(0.2) # Wait javascript to run
 		if correctAnswers == answersToWin - 1:
 			break
@@ -75,7 +84,7 @@ def testEasy():
 	driver.switch_to.alert.accept()
 	driver.switch_to.alert.accept()
 	time.sleep(0.2)
-	assert(driver.find_element_by_id("mediumButton").is_enabled() == True)
+	assert(driver.find_element(By.ID, "mediumButton").is_enabled() == True)
 	driver.back()
 	driver.back()
 	time.sleep(0.2)
@@ -83,8 +92,8 @@ def testEasy():
 
 def testBlock1(maxLevels):
 	print("Start test Block 1")
-	driver.find_element_by_id("playId").click()
-	driver.find_element_by_id("block1Button").click()
+	driver.find_element(By.ID, "playId").click()
+	driver.find_element(By.ID, "block1Button").click()
 	for currentLevel in range(1, maxLevels + 1):
 		playLevel(currentLevel, 10, False)
 		playLevel(currentLevel, 10, True)
@@ -95,26 +104,26 @@ def testBlock1(maxLevels):
 
 def playLevel(currentLevel, maxLevels, openNewLevel):
 	testDisabledLevels(currentLevel, maxLevels)
-	driver.find_element_by_id("Button" + str(currentLevel)).click()
+	driver.find_element(By.ID, "Button" + str(currentLevel)).click()
 	correctAnswers = driver.execute_script("return correctAnswers")
 	answersToWin = driver.execute_script("return answersToWin")
 	wantedNumber = driver.execute_script("return wantedNumber")
 	if not openNewLevel:
 		for i in range(0, int(120 / 5)):
-			if int(driver.find_element_by_name(wantedNumber).get_attribute("id")) == 0:
-				driver.find_element_by_id(1).click()
+			if int(driver.find_element(By.NAME, wantedNumber).get_attribute("id")) == 0:
+				driver.find_element(By.ID, "1").click()
 			else:
-				driver.find_element_by_id(0).click()
+				driver.find_element(By.ID, "0").click()
 		
 	for i in range(0, int(120 / 20 * 3)):
-		if int(driver.find_element_by_name(wantedNumber).get_attribute("id")) == 0:
-			driver.find_element_by_id(1).click()
+		if int(driver.find_element(By.NAME, wantedNumber).get_attribute("id")) == 0:
+			driver.find_element(By.ID, "1").click()
 		else:
-			driver.find_element_by_id(0).click()
+			driver.find_element(By.ID, "0").click()
 
 	while True:
 		wantedNumber = driver.execute_script("return wantedNumber")
-		driver.find_element_by_name(wantedNumber).click()
+		driver.find_element(By.NAME, wantedNumber).click()
 		time.sleep(delayValue) # Wait javascript to run
 		if correctAnswers == answersToWin - 1:
 			break
@@ -130,25 +139,25 @@ def testDisabledLevels(currentLevel, maxLevels):
 	time.sleep(delayValue)
 	for i in range(1, maxLevels + 1):
 		if i <= currentLevel:
-			assert(driver.find_element_by_id("Button" + str(i)).is_enabled() == True)
+			assert(driver.find_element(By.ID, "Button" + str(i)).is_enabled() == True)
 		else:
-			assert(driver.find_element_by_id("Button" + str(i)).is_enabled() == False)
+			assert(driver.find_element(By.ID, "Button" + str(i)).is_enabled() == False)
 
 
 def testHighScore(block, maxLevels, isPlayed):
-	driver.find_element_by_id("highscoreId").click()
-	driver.find_element_by_id("block" + str(block) + "Button").click()
+	driver.find_element(By.ID, "highscoreId").click()
+	driver.find_element(By.ID, "block" + str(block) + "Button").click()
 	for level in range(1, maxLevels + 1):
 		if isPlayed:
-			assert(driver.find_element_by_id("level" + str(level) + "Time").text != "No record")
+			assert(driver.find_element(By.ID, "level" + str(level) + "Time").text != "No record")
 		else:
-			assert(driver.find_element_by_id("level" + str(level) + "Time").text == "No record")
+			assert(driver.find_element(By.ID, "level" + str(level) + "Time").text == "No record")
 	
 	if block == 1:
 		if isPlayed:
-			assert(driver.find_element_by_id("totalTime").text != "No record")
+			assert(driver.find_element(By.ID, "totalTime").text != "No record")
 		else:
-			assert(driver.find_element_by_id("totalTime").text == "No record")
+			assert(driver.find_element(By.ID, "totalTime").text == "No record")
 		
 	driver.back()
 	driver.back()
