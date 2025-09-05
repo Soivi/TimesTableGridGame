@@ -2,7 +2,7 @@
   "name": "Times Table Grid Game",
   "short_name": "Times Table",
   "description": "Practice your multiplication tables with this interactive grid game",
-  "start_url": "/index.html",
+  "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#343a40",
