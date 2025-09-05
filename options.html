@@ -5,6 +5,7 @@
 	<title>Options</title>
 
 	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<link href="styles/default.css" rel="stylesheet" type="text/css" />
 	<script src="js/localStorage.js"></script>
 
@@ -37,7 +38,11 @@
 		}
 
 		function exit() {
-			navigator.app.backHistory();
+			if (window.history.length > 1) {
+				window.history.back();
+			} else {
+				window.location.href = 'index.html';
+			}
 		}
 	</script>
 </head>
