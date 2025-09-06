@@ -7,14 +7,6 @@
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<link href="../styles/default.css" rel="stylesheet" type="text/css" />
-	<script type="text/javascript" charset="utf-8">
-		let endingTime = new Date().getTime() + 40000;
-		let xMultiplication = 33;
-		let yMultiplication = 47;
-		let difficultyTable = 5;
-		let answersToWin = 10;
-
-	</script>
 </head>
 
 <body>
@@ -26,7 +18,17 @@
 
 	<table id="theTable"> </table>
 
+	<script type="text/javascript" charset="utf-8" src="../js/localStorage.js"></script>
+	<script type="text/javascript" charset="utf-8" src="../js/createTable.js"></script>
+	<script type="text/javascript" charset="utf-8" src="../js/deviceReady.js"></script>
 	<script type="text/javascript" charset="utf-8">
+
+		let endingTime = new Date().getTime() + 40000;
+		let xMultiplication = 33;
+		let yMultiplication = 47;
+		let difficultyTable = 5;
+		let answersToWin = 10;
+
 		function startTime() {
 			document.getElementById('infoTime').innerHTML = "Time: " + Math.round((endingTime - new Date().getTime()) / 1000);
 			if(correctAnswers < answersToWin) {
@@ -67,7 +69,7 @@
 
 		function gameOver() {
 			totalTime = (endingTime - new Date().getTime()) / 1000;
-			db.transaction(queryDB, errorCB);
+			checkAndSaveHighScore();
 		}
 
 		function timeOver() {
@@ -79,42 +81,26 @@
 			window.history.back();
 		}
 
-		// Populate the database 
-		function populateDB(tx) {
-			tx.executeSql('UPDATE HIGHSCORESTABLE SET data="' + totalTime + '" WHERE id=' + difficultyTable + '');
-			db.transaction(exit);
-		}
-
-		// Query the database
-		function queryDB(tx) {
-			tx.executeSql('SELECT * FROM HIGHSCORESTABLE', [], querySuccess, errorCB);
-		}
-
-		// Query the success callback
-		function querySuccess(tx, results) {
-			yourBestTime = results.rows.item(difficultyTable).data;
+		function checkAndSaveHighScore() {
+			const highScores = getHighScores();
+			yourBestTime = highScores[difficultyTable] || 0;
+			
 			if (yourBestTime == 0) {
 				alert('You made the impossible possible!!! Your time was ' + totalTime + ' sec. Have a cookie!');
-				db.transaction(populateDB, errorCB);         // callback
+				highScores[difficultyTable] = totalTime;
+				saveHighScores(highScores);
 			}
 			else if (totalTime > yourBestTime) {
 				alert('You made a new record. Your time was ' + totalTime + ' sec');
-				db.transaction(populateDB, errorCB);
+				highScores[difficultyTable] = totalTime;
+				saveHighScores(highScores);
 			}
 			else {
 				alert('Your time was ' + totalTime + ' sec.');
-				exit();
 			}
-		}
-
-		// Transaction error callback
-		function errorCB(err) {
-			console.log("Error processing SQL: " + err.code);
+			exit();
 		}
 	</script>
-	<script type="text/javascript" charset="utf-8" src="../js/localStorage.js"></script>
-	<script type="text/javascript" charset="utf-8" src="../js/createTable.js"></script>
-	<script type="text/javascript" charset="utf-8" src="../js/deviceReady.js"></script>
 </body>
 
 </html>
