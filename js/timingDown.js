@@ -13,7 +13,7 @@ function timeOver() {
 	gameOver();
 }
 
-function wrongQuess() {
+function wrongGuess() {
 	if (vibrationOff == 1) {
 		navigator.vibrate(500);	// Vibrate for 0.5 seconds
 	}

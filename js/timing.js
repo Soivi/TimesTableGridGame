@@ -3,7 +3,7 @@ function startTime() {
 	t = setTimeout(function () { startTime() }, 500);
 }
 
-function wrongQuess() {
+function wrongGuess() {
 	if (vibrationOff == 1) {
 		navigator.vibrate(500);	// Vibrate for 0.5 seconds
 	}

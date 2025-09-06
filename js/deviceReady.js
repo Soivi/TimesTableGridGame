@@ -6,7 +6,7 @@ let correctAnswers = -1;
 
 makeTable();
 
-function quessClick(num, id) {
+function guessClick(num, id) {
 	if (num == wantedNumber) {
 		randomNumber();
 		document.getElementById(id).removeAttribute("onmousedown");
@@ -14,7 +14,7 @@ function quessClick(num, id) {
 		document.getElementById(id).classList.add("guessbuttondisabled");
 		document.getElementById(id).classList.remove("guessbutton");
 	} else {
-		wrongQuess();
+		wrongGuess();
 	}
 }
 

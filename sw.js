@@ -47,7 +47,7 @@ const urlsToCache = [
   '/js/database.js',
   '/js/databaseBlock2.js',
   '/js/options.js',
-  '/js/quessAndRandomNumber.js',
+  '/js/guessAndRandomNumber.js',
   '/js/timing.js',
   '/js/timingDown.js',
   '/js/createTable.js',
