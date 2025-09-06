@@ -1,3 +1,5 @@
+let vibrationIsOn = getVibrationSetting();
+
 function makeTable() {
 	let rows = 5;
 	let cols = 5;

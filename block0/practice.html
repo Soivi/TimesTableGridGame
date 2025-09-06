@@ -18,7 +18,6 @@
 
 	<script type="text/javascript" charset="utf-8" src="../js/localStorage.js"></script>
 	<script type="text/javascript" charset="utf-8" src="../js/createTable.js"></script>
-	<script type="text/javascript" charset="utf-8" src="../js/options.js"></script>
 	<script type="text/javascript" charset="utf-8">
 
 		let wantedNumber;
@@ -65,7 +64,7 @@
 		}
 
 		function wrongGuess() {
-			if (vibrationOff == 1) {
+			if (vibrationIsOn === true) {
 				navigator.vibrate(500);	// Vibrate for 0.5 seconds
 			}
 		}

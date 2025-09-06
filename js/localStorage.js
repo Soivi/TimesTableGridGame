@@ -5,12 +5,16 @@ function initializeLocalStorage() {
     // Initialize highscores if it doesn't exist
     if (!localStorage.getItem('highscores')) {
         const initialData = {};
-        initialData[0] = 1; // Vibration setting (1 = ON, 0 = OFF)
+
         for (let i = 1; i <= 25; i++) {
             initialData[i] = 0; // High score slots
         }
         localStorage.setItem('highscores', JSON.stringify(initialData));
-        console.log("LocalStorage initialized with default values");
+    }
+    
+    // Initialize vibration setting if it doesn't exist
+    if (!localStorage.getItem('vibration')) {
+        setVibrationSetting(true);
     }
 }
 
@@ -21,7 +25,11 @@ function getHighScores() {
     } catch (error) {
         console.error("Error reading highscores from localStorage:", error);
         // Return default structure if parsing fails
-        return { 0: 1 };
+        const defaultHighScores = {};
+        for (let i = 1; i <= 25; i++) {
+            defaultHighScores[i] = 0;
+        }
+        return defaultHighScores;
     }
 }
 
@@ -38,15 +46,25 @@ function saveHighScores(highscores) {
 
 // Utility function to get vibration setting
 function getVibrationSetting() {
-    const highscores = getHighScores();
-    return highscores[0] !== undefined ? highscores[0] : 1;
+    try {
+        const vibrationValue = localStorage.getItem('vibration');
+        if (vibrationValue === null) {
+            return true; // Default to true if not set
+        }
+        return JSON.parse(vibrationValue);
+    } catch (error) {
+        console.error("Error reading vibration setting from localStorage:", error);
+        return true; // Default to true on error
+    }
 }
 
 // Utility function to set vibration setting
 function setVibrationSetting(value) {
-    const highscores = getHighScores();
-    highscores[0] = value;
-    return saveHighScores(highscores);
+    try {
+        localStorage.setItem('vibration', JSON.stringify(value));
+    } catch (error) {
+        console.error("Error saving vibration setting to localStorage:", error);
+    }
 }
 
 // Utility function to calculate block unlock status

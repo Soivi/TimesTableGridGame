@@ -14,7 +14,7 @@ function timeOver() {
 }
 
 function wrongGuess() {
-	if (vibrationOff == 1) {
+	if (vibrationIsOn === true) {
 		navigator.vibrate(500);	// Vibrate for 0.5 seconds
 	}
 	endingTime = endingTime - 5000;

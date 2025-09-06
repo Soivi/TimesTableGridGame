@@ -20,7 +20,7 @@
 
 		function updateVibrationButtons() {
 			const vibrationSetting = getVibrationSetting();
-			if (vibrationSetting == 1) {
+			if (vibrationSetting === true) {
 				document.getElementById("vibrationOn").disabled = true;
 				document.getElementById("vibrationOff").disabled = false;
 			} else {
@@ -29,10 +29,10 @@
 			}
 		}
 
-		function vibrationOff(number) {
-			setVibrationSetting(number);
+		function vibrationSet(value) {
+			setVibrationSetting(value);
 			updateVibrationButtons();
-			if (number == 0) {
+			if (value === true) {
 				navigator.vibrate(1000);
 			}
 		}
@@ -51,8 +51,8 @@
 	<img style="margin:0px auto;display:block" src="pictures/optionslogo.png" alt="optionslogo" height="16%"
 		width="70%">
 	<div class="indexButtons">
-		<a onClick="vibrationOff(1)"><button id="vibrationOn">Vibration ON</button></a>
-		<a onClick="vibrationOff(0)"><button id="vibrationOff">Vibration OFF</button></a>
+		<a onClick="vibrationSet(true)"><button id="vibrationOn">Vibration ON</button></a>
+		<a onClick="vibrationSet(false)"><button id="vibrationOff">Vibration OFF</button></a>
 	</div>
 </body>
 

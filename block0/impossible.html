@@ -59,7 +59,7 @@
 		}
 
 		function wrongGuess() {
-			if (vibrationOff == 0) {
+			if (vibrationIsOn === true) {
 				navigator.vibrate(500);	// Vibrate for 0.5 seconds
 			}
 			endingTime = endingTime - 5000;
@@ -114,7 +114,6 @@
 	</script>
 	<script type="text/javascript" charset="utf-8" src="../js/localStorage.js"></script>
 	<script type="text/javascript" charset="utf-8" src="../js/createTable.js"></script>
-	<script type="text/javascript" charset="utf-8" src="../js/options.js"></script>
 	<script type="text/javascript" charset="utf-8" src="../js/deviceReady.js"></script>
 </body>
 
