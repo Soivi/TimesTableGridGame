@@ -13,7 +13,13 @@ chrome_options.add_argument("--disable-backgrounding-occluded-windows")
 chrome_options.add_argument("--disable-features=TranslateUI")
 
 driver = webdriver.Chrome(options=chrome_options)
-#driver.get("http://soivi.github.io/TimesTableGridGame")
+# For production testing, uncomment the following line:
+# driver.get("https://timestablegridgame.soivi.net")
+
+# For local development server testing, uncomment the following line:
+# driver.get("http://localhost:5500/index.html") # For local server
+
+# For offline/local file testing, use the following line:
 driver.get("file://" + os.getcwd() + "/../index.html") # Get local files
 
 delayValue = 0.05
