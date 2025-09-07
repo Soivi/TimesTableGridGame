@@ -46,7 +46,6 @@ const urlsToCache = [
   '/js/deviceReady.js',
   '/js/database.js',
   '/js/databaseBlock2.js',
-  '/js/options.js',
   '/js/guessAndRandomNumber.js',
   '/js/timing.js',
   '/js/timingDown.js',
