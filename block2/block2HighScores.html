@@ -12,7 +12,7 @@
 	<script type="text/javascript" charset="utf-8">
 
 		// Initialize localStorage and load high scores
-		document.addEventListener('DOMContentLoaded', function() {
+		window.addEventListener("pageshow", function() {
 			initializeLocalStorage();
 			loadHighScores();
 		});

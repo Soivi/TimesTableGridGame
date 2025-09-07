@@ -12,7 +12,7 @@
   <script type="text/javascript" charset="utf-8">
 
     // Wait for DOM to load before initializing
-    document.addEventListener("DOMContentLoaded", function () {
+    window.addEventListener("pageshow", function () {
       initializeLocalStorage();
       loadHighScoresAndCalculateBlocks();
     });

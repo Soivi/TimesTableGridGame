@@ -13,7 +13,7 @@
 
 		//document.addEventListener("backbutton", exit, false);
 		
-		document.addEventListener("DOMContentLoaded", function() {
+		window.addEventListener("pageshow", function() {
 			initializeLocalStorage();
 			updateVibrationButtons();
 		});

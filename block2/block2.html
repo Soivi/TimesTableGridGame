@@ -13,7 +13,7 @@
 		let unlockSeconds = 15;
 
 		// Initialize localStorage and check unlock status when page loads
-		document.addEventListener('DOMContentLoaded', function() {
+		window.addEventListener("pageshow", function() {
 			initializeLocalStorage();
 			checkUnlockStatus();
 		});
