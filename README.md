@@ -1,7 +1,7 @@
 # TimesTableGridGame
 
 ## Live Application
-The application can be tested at: https://soivi.github.io/TimesTableGridGame/
+The application can be tested at: https://timestablegridgame.soivi.net
 
 ## Selenium testing
 Install pip and selenium
