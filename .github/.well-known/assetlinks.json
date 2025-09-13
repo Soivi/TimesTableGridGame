@@ -1,0 +1,8 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "net.soivi.timestablegridgame.twa",
+    "sha256_cert_fingerprints": ["DA:08:7D:68:48:81:76:C8:A2:F7:92:F4:70:77:4B:7D:42:6A:42:E5:0D:7B:92:21:A8:21:D1:59:59:82:5C:98"]
+  }
+}]
