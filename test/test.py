@@ -4,6 +4,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
 import time
 import os
+import sys
 
 chrome_options = Options()
 chrome_options.add_argument("--disable-background-networking")
@@ -13,14 +14,20 @@ chrome_options.add_argument("--disable-backgrounding-occluded-windows")
 chrome_options.add_argument("--disable-features=TranslateUI")
 
 driver = webdriver.Chrome(options=chrome_options)
-# For production testing, uncomment the following line:
-# driver.get("https://timestablegridgame.soivi.net")
 
-# For local development server testing, uncomment the following line:
-# driver.get("http://localhost:5500/index.html") # For local server
+def get_url(mode="local"):
+	if mode == "production":
+		return "https://timestablegridgame.soivi.net"
+	elif mode == "server":
+		return "http://localhost:5500/index.html"
+	elif mode == "local":
+		return "file://" + os.getcwd() + "/../index.html"
+	else:
+		raise ValueError("Invalid mode. Use 'production', 'server', or 'local'")
 
-# For offline/local file testing, use the following line:
-driver.get("file://" + os.getcwd() + "/../index.html") # Get local files
+# Get mode from command line argument, default to 'local'
+mode = sys.argv[1] if len(sys.argv) > 1 else "local"
+driver.get(get_url(mode))
 
 delayValue = 0.05
 
