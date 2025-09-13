@@ -1,4 +1,5 @@
 {
+  "id": "/",
   "name": "Times Table Grid Game",
   "short_name": "Times Table",
   "description": "Practice your multiplication tables with this interactive grid game",
@@ -17,6 +18,26 @@
       "src": "icon-512.png",
       "sizes": "512x512",
       "type": "image/png"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "pictures/screenshots/main-menu.jpg",
+      "sizes": "1080x1920",
+      "type": "image/jpeg",
+      "form_factor": "narrow"
+    },
+    {
+      "src": "pictures/screenshots/gameplay-grid.jpg",
+      "sizes": "1080x1920",
+      "type": "image/jpeg",
+      "form_factor": "narrow"
+    },
+    {
+      "src": "pictures/screenshots/level-selection.jpg",
+      "sizes": "1080x1920",
+      "type": "image/jpeg",
+      "form_factor": "narrow"
     }
   ]
 }
