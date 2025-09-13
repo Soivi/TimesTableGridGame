@@ -5,9 +5,12 @@
   "description": "Practice your multiplication tables with this interactive grid game",
   "start_url": "/",
   "display": "standalone",
+  "display_override": ["standalone"],
   "background_color": "#ffffff",
   "theme_color": "#343a40",
   "orientation": "portrait",
+  "lang": "en",
+  "dir": "ltr",
   "icons": [
     {
       "src": "icon-192.png",
@@ -38,6 +41,20 @@
       "sizes": "1080x1920",
       "type": "image/jpeg",
       "form_factor": "narrow"
+    },
+    {
+      "src": "pictures/screenshots/gameplay-grid-wide.jpg",
+      "sizes": "1920x1080",
+      "type": "image/jpeg",
+      "form_factor": "wide"
+    }
+  ],
+  "categories": ["games"],
+  "related_applications": [
+    {
+      "platform": "play",
+      "url": "https://play.google.com/store/apps/details?id=com.soivi.timestablegridgame",
+      "id": "com.soivi.timestablegridgame"
     }
   ]
 }
