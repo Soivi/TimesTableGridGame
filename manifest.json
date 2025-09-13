@@ -50,11 +50,13 @@
     }
   ],
   "categories": ["games"],
+  "prefer_related_applications": true,
   "related_applications": [
     {
       "platform": "play",
       "url": "https://play.google.com/store/apps/details?id=com.soivi.timestablegridgame",
       "id": "com.soivi.timestablegridgame"
     }
-  ]
+  ],
+  "scope": "https://timestablegridgame.soivi.net/"
 }
