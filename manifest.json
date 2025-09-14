@@ -2,7 +2,7 @@
   "id": "/",
   "name": "Times Table Grid Game",
   "short_name": "Times Table",
-  "description": "Practice your multiplication tables with this interactive grid game",
+  "description": "This isn't an ordinary times table game, this is something new! In this game you are asked to place the product of a multiplication in the correct cell in the grid.",
   "start_url": "/",
   "display": "standalone",
   "display_override": ["standalone"],
