@@ -1,0 +1,11 @@
+# GitHub Pages configuration
+
+# Include the .well-known directory in the site build
+include:
+  - .well-known
+
+# Exclude unnecessary files from the site build
+exclude:
+  - test/
+  - README.md
+  - LICENSE
